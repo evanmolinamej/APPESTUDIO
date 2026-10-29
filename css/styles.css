@@ -31,6 +31,7 @@ body {
   background: var(--menta);
 }
 h1, h2, h3, p, ul { margin: 0; padding: 0; }
+[hidden] { display: none !important; } /* lo oculto debe quedar oculto aunque otra clase diga display */
 button, input, textarea, select { font: inherit; color: inherit; }
 .mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; }
 .lbl { font-size: 14px; font-weight: 800; color: var(--suave); }
@@ -267,6 +268,28 @@ kbd {
 .vacio-grande[hidden] { display: none; }
 .vacio-grande h3 { font-size: 20px; font-weight: 900; }
 .vacio-grande p { max-width: 380px; font-size: 16px; font-weight: 600; color: var(--suave); }
+
+/* ---------- Ideas clave ---------- */
+.nueva-idea { margin-top: 14px; }
+.nueva-idea[hidden] { display: none; }
+.nueva-idea-fila { display: flex; align-items: flex-end; gap: 10px; }
+.nueva-idea-campo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.nueva-idea .campo { height: 52px; }
+.nueva-idea .btn-p { height: 52px; flex: none; }
+.ayuda-idea { margin-top: 4px; text-align: right; font-weight: 700; }
+.lista-ideas { margin-top: 8px; display: flex; flex-direction: column; gap: 10px; list-style: none; }
+.lista-ideas:empty { display: none; }
+.idea {
+  display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 6px 6px 6px 16px;
+  background: var(--arena); border: 2px solid var(--arena-borde); border-radius: 18px; box-shadow: var(--sombra-sm);
+}
+.idea .dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--cactus); }
+.idea .txt { flex: 1; font-size: 16px; font-weight: 700; line-height: 1.35; overflow-wrap: anywhere; }
+.idea .pill { flex: none; max-width: 40%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vacio-grande.compacto { padding: 20px 14px; }
+.vacio-grande.compacto h3 { font-size: 18px; }
+.vacio-grande.compacto p { font-size: 15px; }
+.vacio-grande .btn { margin-top: 8px; }
 
 /* ---------- Aviso breve con "Deshacer" ---------- */
 .aviso-breve {

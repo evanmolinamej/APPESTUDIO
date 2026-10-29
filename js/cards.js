@@ -17,7 +17,9 @@ var ICONO_BORRAR = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" 
 var formMateria, campoMateria, mensajeMateria, botonCancelarMateria, etiquetaMateria;
 var cajaNuevaTarjeta, etiquetaTarjetaMateria, campoPregunta, campoRespuesta, mensajeTarjeta;
 var avisoElegirMateria, listaTarjetas, vacioTarjetas, textoVacioTarjetas;
+var formIdea, campoIdea, contadorIdea, mensajeIdea, etiquetaIdea, avisoElegirIdeas, listaIdeas, vacioIdeas;
 var avisoBreve, avisoTexto, avisoDeshacer;
+var MAX_IDEA = 120; // caracteres
 
 // ============================================================
 // Ayudas
@@ -116,6 +118,7 @@ function elegirMateria(id) {
 // Lleva el foco al campo donde se escribe en la pestaña activa.
 function enfocarCampoPrincipal() {
   if (state.pestana === 'flashcards' && !cajaNuevaTarjeta.hidden) campoPregunta.focus();
+  if (state.pestana === 'ideas' && !formIdea.hidden) campoIdea.focus();
 }
 
 // ============================================================
@@ -227,6 +230,87 @@ function ponerEstadoTarjeta(boton, tarjeta, volteada) {
 }
 
 // ============================================================
+// Ideas clave
+// ============================================================
+
+// Las ideas que se ven según el chip elegido.
+function ideasVisibles() {
+  return state.ideas.filter(function (idea) {
+    return state.materiaActiva === null || idea.materiaId === state.materiaActiva;
+  });
+}
+
+// Agrega una idea en la materia elegida (Enter o botón "Agregar").
+function agregarIdea(evento) {
+  evento.preventDefault();
+  var texto = campoIdea.value.trim().replace(/\s+/g, ' ');
+  if (!texto) {
+    mostrarMensaje(mensajeIdea, 'Escribe una idea antes de agregarla.');
+    campoIdea.setAttribute('aria-invalid', 'true');
+    campoIdea.focus();
+    return;
+  }
+  state.ideas.push({ id: nuevoId('i'), materiaId: state.materiaActiva, texto: texto.slice(0, MAX_IDEA) });
+  campoIdea.value = '';
+  campoIdea.removeAttribute('aria-invalid');
+  ocultarMensaje(mensajeIdea);
+  actualizarContadorIdea();
+  renderPanel();
+  campoIdea.focus();
+}
+
+// "0 / 120": se actualiza con cada letra.
+function actualizarContadorIdea() {
+  contadorIdea.textContent = campoIdea.value.length + ' / ' + MAX_IDEA;
+}
+
+// Borra una idea y ofrece "Deshacer".
+function borrarIdea(id) {
+  var visibles = ideasVisibles().slice().reverse(); // el orden en que se ven
+  var posicionVista = visibles.findIndex(function (i) { return i.id === id; });
+  var indice = state.ideas.findIndex(function (i) { return i.id === id; });
+  if (indice < 0) return;
+  var idea = state.ideas.splice(indice, 1)[0];
+  renderPanel();
+
+  var botones = listaIdeas.querySelectorAll('.icon-btn');
+  if (botones.length) botones[Math.min(posicionVista, botones.length - 1)].focus();
+  else if (!formIdea.hidden) campoIdea.focus();
+
+  mostrarAviso('Idea borrada', function () {
+    state.ideas.splice(indice, 0, idea);
+    renderPanel();
+  });
+}
+
+// Una idea de la lista: punto verde, texto y botón de borrar.
+function elementoIdea(idea) {
+  var item = el('li', 'idea');
+  item.appendChild(el('span', 'dot'));
+  item.appendChild(el('span', 'txt', idea.texto));
+  if (state.materiaActiva === null) { // con "Todas" se indica de qué materia es cada idea
+    var materia = materiaPorId(idea.materiaId);
+    item.appendChild(el('span', 'pill', materia ? materia.nombre : ''));
+  }
+  var borrar = el('button', 'icon-btn');
+  borrar.type = 'button';
+  borrar.setAttribute('aria-label', 'Borrar idea: ' + idea.texto);
+  borrar.innerHTML = ICONO_BORRAR;
+  borrar.addEventListener('click', function () { borrarIdea(idea.id); });
+  item.appendChild(borrar);
+  return item;
+}
+
+// El botón del estado vacío lleva el foco a donde se puede empezar a escribir.
+function escribirPrimeraIdea() {
+  if (state.materias.length === 0) campoMateria.focus();
+  else if (state.materiaActiva === null) {
+    var primerChip = document.querySelector('#panel-ideas .chip[data-chip]:not([data-chip="todas"])');
+    if (primerChip) primerChip.focus();
+  } else campoIdea.focus();
+}
+
+// ============================================================
 // Aviso breve con "Deshacer" (compartido por tarjetas e ideas)
 // ============================================================
 function mostrarAviso(texto, alDeshacer) {
@@ -259,6 +343,7 @@ function renderPanel() {
   renderFormMateria();
   renderNuevaTarjeta();
   renderListaTarjetas();
+  renderIdeas();
   document.getElementById('badge-tarjetas').textContent = state.tarjetas.length;
   document.getElementById('badge-ideas').textContent = state.ideas.length;
 }
@@ -337,6 +422,19 @@ function renderListaTarjetas() {
     : 'Anota una pregunta con su respuesta mientras estudias. Aparecerán aquí.';
 }
 
+function renderIdeas() {
+  var sinMaterias = state.materias.length === 0;
+  var materia = materiaPorId(state.materiaActiva);
+  formIdea.hidden = sinMaterias || !materia;
+  avisoElegirIdeas.hidden = sinMaterias || !!materia;
+  etiquetaIdea.textContent = materia ? 'Nueva idea en ' + materia.nombre : 'Nueva idea';
+
+  var visibles = ideasVisibles().slice().reverse(); // la más nueva arriba
+  listaIdeas.textContent = '';
+  visibles.forEach(function (idea) { listaIdeas.appendChild(elementoIdea(idea)); });
+  vacioIdeas.hidden = visibles.length > 0;
+}
+
 // ============================================================
 // Arranque del panel
 // ============================================================
@@ -355,6 +453,14 @@ function iniciarCards() {
   listaTarjetas = document.getElementById('lista-tarjetas');
   vacioTarjetas = document.getElementById('vacio-tarjetas');
   textoVacioTarjetas = document.getElementById('vacio-tarjetas-texto');
+  formIdea = document.getElementById('form-idea');
+  campoIdea = document.getElementById('idea-texto');
+  contadorIdea = document.getElementById('idea-contador');
+  mensajeIdea = document.getElementById('idea-msg');
+  etiquetaIdea = document.getElementById('idea-etiqueta');
+  avisoElegirIdeas = document.getElementById('elegir-materia-ideas');
+  listaIdeas = document.getElementById('lista-ideas');
+  vacioIdeas = document.getElementById('vacio-ideas');
   avisoBreve = document.getElementById('aviso-breve');
   avisoTexto = document.getElementById('aviso-texto');
   avisoDeshacer = document.getElementById('aviso-deshacer');
@@ -376,6 +482,10 @@ function iniciarCards() {
       }
     });
   });
+
+  formIdea.addEventListener('submit', agregarIdea);
+  campoIdea.addEventListener('input', actualizarContadorIdea);
+  document.getElementById('idea-primera').addEventListener('click', escribirPrimeraIdea);
 
   avisoDeshacer.addEventListener('click', deshacerUltimo);
   renderPanel();

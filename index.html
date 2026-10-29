@@ -172,7 +172,28 @@
           <div role="tabpanel" id="panel-ideas" aria-labelledby="tab-ideas" hidden>
             <div class="chips js-chips" data-tipo="ideas" role="group" aria-label="Filtrar por materia"></div>
             <div class="slot-materia"></div>
-            <p class="lbl">Las ideas clave llegan en la Fase 5.</p>
+
+            <form class="nueva-idea" id="form-idea" novalidate hidden>
+              <div class="nueva-idea-fila">
+                <div class="nueva-idea-campo">
+                  <label class="lbl" for="idea-texto" id="idea-etiqueta">Nueva idea</label>
+                  <input class="campo" id="idea-texto" type="text" maxlength="120" autocomplete="off" placeholder="Una frase corta que no quieras olvidar" aria-describedby="idea-ayuda idea-msg">
+                </div>
+                <button class="btn btn-p btn-sm" type="submit"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Agregar</button>
+              </div>
+              <p class="lbl ayuda-idea" id="idea-ayuda">Enter para agregar · <span id="idea-contador">0 / 120</span></p>
+              <p class="msg-error" id="idea-msg" role="alert" hidden></p>
+            </form>
+            <p class="card elegir-materia" id="elegir-materia-ideas" hidden>Elige una materia arriba para añadir ideas.</p>
+
+            <ul class="lista-ideas" id="lista-ideas"></ul>
+
+            <div class="vacio-grande compacto" id="vacio-ideas">
+              <svg width="96" height="84" viewBox="0 0 96 84" fill="none" aria-hidden="true"><rect x="16" y="10" width="56" height="62" rx="12" fill="#F7EFD8" stroke="#1E5B3C" stroke-width="4"/><path d="M28 28H60M28 40H60M28 52H46" stroke="#1E5B3C" stroke-width="4" stroke-linecap="round"/><circle cx="74" cy="18" r="9" fill="#F28FA8" stroke="#1E5B3C" stroke-width="3.5"/></svg>
+              <h3>Aún no hay ideas</h3>
+              <p>Anota frases cortas que no quieras olvidar: una fórmula, una fecha, una definición.</p>
+              <button class="btn btn-p btn-sm" id="idea-primera" type="button">Escribir mi primera idea</button>
+            </div>
           </div>
 
           <!-- PESTAÑA: Repaso (Fase 6) -->
