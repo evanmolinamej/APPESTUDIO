@@ -93,12 +93,43 @@
       <p class="aviso">Tus tarjetas viven solo en esta pestaña. Puedes descargarlas cuando quieras.</p>
     </section>
 
-    <!-- VISTA PROVISIONAL (Fase 2): se reemplaza por la sesión real en la Fase 3 -->
-    <section class="vista" data-vista="estudio" aria-labelledby="titulo-estudio" hidden>
+    <!-- VISTA 2: Sesión de estudio. El cronómetro queda fijo arriba; solo el panel de abajo hace scroll. -->
+    <section class="vista sesion" data-vista="estudio" aria-label="Sesión de estudio" hidden>
+      <section class="zona reloj" aria-label="Cronómetro">
+        <div class="reloj-top">
+          <span class="estado"><span class="punto"></span><span id="etiqueta-fase">Estudiando</span></span>
+          <span class="lbl" id="etiqueta-bloque">Bloque 1</span>
+        </div>
+        <div class="reloj-medio">
+          <span id="cactus-reloj"></span>
+          <div class="mono tiempo" id="tiempo" role="timer" aria-label="25 minutos 0 segundos">25:00</div>
+        </div>
+        <div class="progreso" aria-hidden="true"><div id="progreso-barra"></div></div>
+        <div class="reloj-botones">
+          <button class="btn btn-p" id="boton-pausa" type="button"></button>
+          <button class="btn btn-s" id="boton-reiniciar" type="button">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4.5h4.5"/></svg>Reiniciar
+          </button>
+          <span class="espacio"></span>
+          <button class="btn btn-g btn-sm" id="boton-cambiar" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Cambiar tiempo
+          </button>
+        </div>
+      </section>
+
+      <!-- Marcador del panel: las pestañas llegan en las Fases 4 a 6 -->
+      <section class="zona panel" aria-label="Panel de estudio">
+        <p class="lbl">Aquí irán las pestañas Flashcards, Ideas clave y Repaso (Fases 4 a 6).</p>
+      </section>
+    </section>
+
+    <!-- VISTA PROVISIONAL (Fase 3): se reemplaza por el Fin de bloque real en la Fase 7 -->
+    <section class="vista" data-vista="fin-bloque" aria-labelledby="titulo-fin" hidden>
       <div class="zona provisional">
-        <h2 id="titulo-estudio" tabindex="-1">Aquí irá la sesión de estudio (Fase 3)</h2>
-        <p id="datos-sesion"></p>
-        <button class="btn btn-s" id="boton-volver" type="button">Volver al inicio</button>
+        <span id="cactus-fin"></span>
+        <h2 id="titulo-fin" tabindex="-1">¡Bloque terminado!</h2>
+        <p id="mensaje-fin" aria-live="polite"></p>
+        <button class="btn btn-s" id="boton-volver-fin" type="button">Volver al inicio</button>
       </div>
     </section>
 
@@ -107,6 +138,8 @@
 
 <!-- Scripts clásicos (sin módulos) para que abra con doble clic. El orden importa. -->
 <script src="js/state.js"></script>
+<script src="js/timer.js"></script>
+<script src="js/sound.js"></script>
 <script src="js/cactus.js"></script>
 <script src="js/app.js"></script>
 </body>

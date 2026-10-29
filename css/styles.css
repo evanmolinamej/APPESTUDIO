@@ -137,8 +137,26 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .inicio .resumen { margin-top: 8px; font-size: 15px; font-weight: 700; color: var(--suave); }
 .inicio .aviso { margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--suave); text-align: center; }
 
-/* ---------- Sesión (provisional hasta la Fase 3) ---------- */
-.provisional { padding: 24px; text-align: center; }
+/* ---------- Sesión de estudio ---------- */
+/* En la sesión la página ocupa toda la altura de la ventana: el cronómetro queda fijo
+   arriba y solo el panel de abajo hace scroll. */
+body.en-sesion .app { height: 100vh; height: 100dvh; display: flex; flex-direction: column; }
+body.en-sesion main { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.sesion { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 16px; }
+.reloj { flex: none; padding: 20px 24px 22px; }
+.reloj-top { display: flex; align-items: center; justify-content: space-between; }
+.estado { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 800; }
+.punto { width: 10px; height: 10px; border-radius: 50%; background: var(--cactus); }
+.reloj-medio { margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 20px; }
+.tiempo { font-size: 116px; font-weight: 800; line-height: 1; letter-spacing: -.02em; }
+.progreso { margin-top: 14px; height: 12px; border-radius: 6px; background: var(--menta-media); overflow: hidden; }
+.progreso div { width: 0; height: 100%; border-radius: 6px; background: var(--cactus); }
+.reloj-botones { margin-top: 16px; display: flex; align-items: center; gap: 12px; }
+.reloj-botones .espacio { flex: 1; }
+.panel { flex: 1; min-height: 0; overflow-y: auto; padding: 16px 20px 20px; }
+
+/* ---------- Pantallas provisionales (Fase 3) ---------- */
+.provisional { padding: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; }
 .provisional h2 { font-size: 22px; font-weight: 900; }
 .provisional p { margin-top: 8px; font-size: 16px; font-weight: 600; color: var(--suave); }
 .provisional .btn { margin-top: 16px; }
