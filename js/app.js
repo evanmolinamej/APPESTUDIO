@@ -11,6 +11,7 @@ var campoEstudio, campoDescanso, mensajeError;
 var tiempoEl, barraProgreso, botonPausa, etiquetaFase, etiquetaBloque;
 var tiempoDescanso, barraDescanso, botonPausaDescanso, etiquetaDescanso, botonSaltar, botonSiguiente, avisoDescanso;
 var descansoTerminado = false;
+var modalSalir, botonQueAbrioModal = null;
 var empezando = false;
 
 // ============================================================
@@ -19,6 +20,7 @@ var empezando = false;
 
 // Muestra una vista y oculta las demás. "enfocar" mueve el foco al título (ayuda al teclado y a lectores de pantalla).
 function mostrarVista(nombre, enfocar) {
+  if (!modalSalir.hidden) cerrarModalSalir(false); // por ejemplo, si el bloque termina con el aviso abierto
   state.vista = nombre;
   document.querySelectorAll('.vista').forEach(function (vista) {
     vista.hidden = vista.dataset.vista !== nombre;
@@ -242,9 +244,37 @@ function reiniciarBloque() {
   temporizador.reiniciar();
 }
 
-// Cambiar tiempo: vuelve al Inicio.
-// (Fase 8: si hay tarjetas o ideas creadas, aquí se mostrará antes el aviso de descarga.)
+// Cambiar tiempo: vuelve al Inicio. Si hay tarjetas o ideas, primero pregunta si quiere descargarlas.
 function cambiarTiempo() {
+  if (hayContenido()) {
+    abrirModalSalir();
+  } else {
+    reiniciarDatos();
+    volverAlInicio();
+  }
+}
+
+// ---------- Aviso "Tus tarjetas no se guardan" ----------
+function abrirModalSalir() {
+  botonQueAbrioModal = document.activeElement;
+  document.getElementById('modal-estado').textContent = '';
+  modalSalir.hidden = false;
+  document.querySelector('.app').inert = true; // lo de atrás no recibe clics ni foco mientras el aviso está abierto
+  document.getElementById('modal-descargar').focus();
+}
+
+// Cierra el aviso. "devolverFoco" lleva el foco de vuelta al botón que lo abrió.
+function cerrarModalSalir(devolverFoco) {
+  modalSalir.hidden = true;
+  document.querySelector('.app').inert = false;
+  if (devolverFoco && botonQueAbrioModal && !botonQueAbrioModal.hidden) botonQueAbrioModal.focus();
+  botonQueAbrioModal = null;
+}
+
+// "Continuar sin descargar": se borra todo y se vuelve al Inicio.
+function continuarSinDescargar() {
+  cerrarModalSalir(false);
+  reiniciarDatos();
   volverAlInicio();
 }
 
@@ -333,6 +363,9 @@ function seleccionarPestana(nombre, enfocar) {
     tab.tabIndex = activa ? 0 : -1; // solo la pestaña activa entra con Tab; las demás, con flechas
     document.getElementById('panel-' + p).hidden = !activa;
   });
+  document.getElementById('nota-descarga').textContent = nombre === 'ideas'
+    ? 'Incluye tus ideas clave. No se guardan al cerrar la pestaña.'
+    : 'Las tarjetas no se guardan al cerrar la pestaña.';
   if (nombre === 'repaso') entrarARepaso();
   if (enfocar) document.getElementById('tab-' + nombre).focus();
   renderPanel(); // el formulario de materia se coloca bajo los chips de la pestaña activa
@@ -379,6 +412,8 @@ function arrancar() {
   botonPausa = document.getElementById('boton-pausa');
   etiquetaFase = document.getElementById('etiqueta-fase');
   etiquetaBloque = document.getElementById('etiqueta-bloque');
+  modalSalir = document.getElementById('modal-salir');
+  document.getElementById('cactus-modal').appendChild(crearCactus('lentes', 64));
   tiempoDescanso = document.getElementById('tiempo-descanso');
   barraDescanso = document.getElementById('progreso-descanso');
   botonPausaDescanso = document.getElementById('boton-pausa-descanso');
@@ -407,6 +442,17 @@ function arrancar() {
   botonSaltar.addEventListener('click', siguienteBloque);
   botonSiguiente.addEventListener('click', siguienteBloque);
   document.getElementById('boton-cambiar-descanso').addEventListener('click', cambiarTiempo);
+
+  // Aviso de salida
+  document.getElementById('modal-descargar').addEventListener('click', function () {
+    descargarTarjetas();
+    document.getElementById('modal-estado').textContent = 'Archivo descargado: effectivestudy-tarjetas.txt';
+  });
+  document.getElementById('modal-continuar').addEventListener('click', continuarSinDescargar);
+  document.getElementById('modal-seguir').addEventListener('click', function () { cerrarModalSalir(true); });
+  modalSalir.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') cerrarModalSalir(true); // Escape = "Seguir estudiando"
+  });
 
   PESTANAS.forEach(function (p) {
     document.getElementById('tab-' + p).addEventListener('click', function () { seleccionarPestana(p, false); });

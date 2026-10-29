@@ -310,7 +310,7 @@ function iniciarRepaso() {
 
   // Atajos 1, 2 y 3 (solo con la respuesta visible y sin escribir en un campo)
   document.addEventListener('keydown', function (e) {
-    if (state.vista !== 'estudio' || state.pestana !== 'repaso') return;
+    if (state.vista !== 'estudio' || state.pestana !== 'repaso' || !modalSalir.hidden) return;
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.target.matches('input, textarea, select')) return;
     var nota = { '1': 'si', '2': 'dudo', '3': 'no' }[e.key];

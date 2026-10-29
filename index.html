@@ -250,6 +250,14 @@
             <button class="btn btn-g btn-sm" id="aviso-deshacer" type="button">Deshacer</button>
           </div>
         </div>
+
+        <!-- Pie del panel: siempre visible -->
+        <div class="panel-pie">
+          <button class="btn btn-s btn-sm" id="boton-descargar" type="button" disabled>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Descargar mis tarjetas
+          </button>
+          <span class="nota-pie" id="nota-descarga">Las tarjetas no se guardan al cerrar la pestaña.</span>
+        </div>
       </section>
     </section>
 
@@ -269,6 +277,9 @@
           </button>
           <button class="btn btn-s" id="boton-otro-bloque" type="button">Otro bloque</button>
         </div>
+        <button class="btn btn-g btn-sm" id="boton-descargar-fin" type="button" disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Descargar mis tarjetas
+        </button>
       </div>
     </section>
 
@@ -311,6 +322,27 @@
     </section>
 
   </main>
+</div>
+
+<!-- Aviso al pulsar "Cambiar tiempo" si hay tarjetas o ideas -->
+<div class="modal" id="modal-salir" hidden>
+  <div class="modal-caja" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+    <div class="modal-cab">
+      <span id="cactus-modal"></span>
+      <div>
+        <h2 id="modal-titulo">Tus tarjetas no se guardan.</h2>
+        <p>¿Descargarlas antes de salir?</p>
+      </div>
+    </div>
+    <div class="modal-botones">
+      <button class="btn btn-p" id="modal-descargar" type="button">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Descargar mis tarjetas
+      </button>
+      <button class="btn btn-s" id="modal-continuar" type="button">Continuar sin descargar</button>
+      <button class="btn btn-g btn-sm" id="modal-seguir" type="button">Seguir estudiando</button>
+    </div>
+    <p class="lbl modal-estado" id="modal-estado" role="status"></p>
+  </div>
 </div>
 
 <!-- Scripts clásicos (sin módulos) para que abra con doble clic. El orden importa. -->

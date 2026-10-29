@@ -18,7 +18,8 @@ var formMateria, campoMateria, mensajeMateria, botonCancelarMateria, etiquetaMat
 var cajaNuevaTarjeta, etiquetaTarjetaMateria, campoPregunta, campoRespuesta, mensajeTarjeta;
 var avisoElegirMateria, listaTarjetas, vacioTarjetas, textoVacioTarjetas;
 var formIdea, campoIdea, contadorIdea, mensajeIdea, etiquetaIdea, avisoElegirIdeas, listaIdeas, vacioIdeas;
-var avisoBreve, avisoTexto, avisoDeshacer;
+var avisoBreve, avisoTexto, avisoDeshacer, botonDescargar, botonDescargarFin;
+var avisoSalidaActivo = false; // ¿está registrado el aviso del navegador al cerrar la pestaña?
 var MAX_IDEA = 120; // caracteres
 
 // ============================================================
@@ -311,6 +312,95 @@ function escribirPrimeraIdea() {
 }
 
 // ============================================================
+// Descarga y salida
+// ============================================================
+
+// Arma el texto del archivo: por cada materia, sus tarjetas (P: / R:) y sus ideas clave.
+function textoDeDescarga() {
+  var lineas = ['EffectiveStudy · Mis tarjetas e ideas clave', 'Descargado el ' + new Date().toLocaleString('es'), ''];
+  state.materias.forEach(function (materia) {
+    var tarjetas = state.tarjetas.filter(function (t) { return t.materiaId === materia.id; });
+    var ideas = state.ideas.filter(function (i) { return i.materiaId === materia.id; });
+    if (tarjetas.length === 0 && ideas.length === 0) return; // las materias vacías no se incluyen
+    lineas.push('== ' + materia.nombre + ' ==', '');
+    if (tarjetas.length) {
+      lineas.push('Tarjetas (' + tarjetas.length + ')');
+      tarjetas.forEach(function (t, n) {
+        lineas.push('P: ' + sangrar(t.pregunta), 'R: ' + sangrar(t.respuesta));
+        if (n < tarjetas.length - 1) lineas.push('');
+      });
+      lineas.push('');
+    }
+    if (ideas.length) {
+      lineas.push('Ideas clave (' + ideas.length + ')');
+      ideas.forEach(function (i) { lineas.push('- ' + sangrar(i.texto)); });
+      lineas.push('');
+    }
+  });
+  return lineas.join('\r\n'); // saltos de línea de Windows: así se ve bien en el Bloc de notas
+}
+
+// Si un texto tiene varias líneas, las siguientes se sangran para que se lea cuál es la continuación.
+function sangrar(texto) {
+  return texto.replace(/\r?\n/g, '\r\n   ');
+}
+
+// Baja el archivo effectivestudy-tarjetas.txt: se crea un "Blob" (archivo en memoria) y un enlace temporal que se pulsa solo.
+function descargarTarjetas() {
+  if (!hayContenido()) return;
+  // "\uFEFF" al inicio avisa al Bloc de notas de Windows de que el archivo es UTF-8 (para que las tildes salgan bien).
+  var archivo = new Blob(['\uFEFF' + textoDeDescarga()], { type: 'text/plain;charset=utf-8' });
+  var direccion = URL.createObjectURL(archivo);
+  var enlace = document.createElement('a');
+  enlace.href = direccion;
+  enlace.download = 'effectivestudy-tarjetas.txt';
+  document.body.appendChild(enlace);
+  enlace.click();
+  enlace.remove();
+  setTimeout(function () { URL.revokeObjectURL(direccion); }, 1000);
+}
+
+// Los botones de descarga solo sirven si hay algo que bajar; el aviso del navegador solo se registra si hay algo que perder.
+function actualizarDescargaYAviso() {
+  var hay = hayContenido();
+  botonDescargar.disabled = !hay;
+  botonDescargarFin.disabled = !hay;
+  if (hay && !avisoSalidaActivo) {
+    window.addEventListener('beforeunload', avisarAlSalir);
+    avisoSalidaActivo = true;
+  } else if (!hay && avisoSalidaActivo) {
+    window.removeEventListener('beforeunload', avisarAlSalir);
+    avisoSalidaActivo = false;
+  }
+}
+
+// El navegador muestra SU propio aviso estándar; su texto no se puede personalizar.
+function avisarAlSalir(evento) {
+  evento.preventDefault();
+  evento.returnValue = ''; // algunos navegadores lo exigen; no muestra ningún texto propio
+}
+
+// Borra todo lo que vive en memoria (materias, tarjetas, ideas y repaso) y deja el panel como nuevo.
+function reiniciarDatos() {
+  state.materias = [];
+  state.tarjetas = [];
+  state.ideas = [];
+  state.materiaActiva = null;
+  state.repaso = null;
+  tarjetasVolteadas = {};
+  formMateriaAbierto = false;
+  firmaOpcionesRepaso = '';
+  [campoMateria, campoPregunta, campoRespuesta, campoIdea].forEach(function (campo) {
+    campo.value = '';
+    campo.removeAttribute('aria-invalid');
+  });
+  [mensajeMateria, mensajeTarjeta, mensajeIdea].forEach(ocultarMensaje);
+  actualizarContadorIdea();
+  ocultarAviso();
+  seleccionarPestana('flashcards', false); // vuelve a dibujar el panel
+}
+
+// ============================================================
 // Aviso breve con "Deshacer" (compartido por tarjetas e ideas)
 // ============================================================
 function mostrarAviso(texto, alDeshacer) {
@@ -345,6 +435,7 @@ function renderPanel() {
   renderListaTarjetas();
   renderIdeas();
   renderRepaso();
+  actualizarDescargaYAviso();
   document.getElementById('badge-tarjetas').textContent = state.tarjetas.length;
   document.getElementById('badge-ideas').textContent = state.ideas.length;
 }
@@ -465,6 +556,8 @@ function iniciarCards() {
   avisoBreve = document.getElementById('aviso-breve');
   avisoTexto = document.getElementById('aviso-texto');
   avisoDeshacer = document.getElementById('aviso-deshacer');
+  botonDescargar = document.getElementById('boton-descargar');
+  botonDescargarFin = document.getElementById('boton-descargar-fin');
 
   formMateria.addEventListener('submit', enviarMateria);
   botonCancelarMateria.addEventListener('click', cancelarFormMateria);
@@ -489,5 +582,7 @@ function iniciarCards() {
   document.getElementById('idea-primera').addEventListener('click', escribirPrimeraIdea);
 
   avisoDeshacer.addEventListener('click', deshacerUltimo);
+  botonDescargar.addEventListener('click', descargarTarjetas);
+  botonDescargarFin.addEventListener('click', descargarTarjetas);
   renderPanel();
 }
