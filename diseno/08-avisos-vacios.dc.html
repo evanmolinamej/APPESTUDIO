@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Aviso al salir y estados vacíos</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--menta:#E4F5EA;--crema:#F6F8F1;--cactus:#4FAE74;--bosque:#1E5B3C;--arena:#F7EFD8;--rosa:#F28FA8;--arena-borde:#E6D6A8;--menta-media:#CBE9D5;--rosa-claro:#FCE3EA;--suave:#4B6B59;--campo:#FFFFFC;--borde-campo:#5E8D72;--sombra-sm:0 2px 8px rgba(30,91,60,.10);--sombra-md:0 8px 22px rgba(30,91,60,.12);--sombra-lg:0 18px 44px rgba(30,91,60,.20)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Nunito',system-ui,sans-serif;font-size:16px;color:var(--bosque);background:var(--menta)}
+h1,h2,h3,p,ul{margin:0;padding:0}
+button,input,textarea,select{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border:2px solid var(--bosque);border-radius:999px;font-size:17px;font-weight:800;line-height:1;text-decoration:none;cursor:pointer;white-space:nowrap}
+.btn-p{background:var(--bosque);color:var(--crema)}
+.btn-s{background:var(--crema);color:var(--bosque)}
+.btn-g{background:transparent;border-color:transparent;color:var(--bosque);padding:0 14px;text-decoration:underline;text-underline-offset:4px}
+.btn-sm{height:44px;padding:0 18px;font-size:15px}
+.btn:focus-visible{outline:3px solid var(--bosque);outline-offset:3px}
+.zona{background:var(--crema);border-radius:32px;box-shadow:var(--sombra-md)}
+.lbl{font-size:14px;font-weight:800;color:var(--suave)}
+.cap{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--suave);margin-bottom:8px}
+.vacio{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:20px 14px;border:2px dashed var(--arena-borde);border-radius:24px}
+.vacio h3{font-size:18px;font-weight:900}
+.vacio p{font-size:15px;font-weight:600;color:var(--suave)}
+</style>
+</helmet>
+<div style="width:700px;height:1160px;padding:24px;background:var(--menta);overflow:hidden;display:flex;flex-direction:column;gap:28px">
+
+<div>
+<p class="cap">Aviso al salir</p>
+<div style="padding:28px;background:rgba(30,91,60,.45);border-radius:28px;display:flex;justify-content:center">
+<div role="dialog" aria-modal="true" aria-labelledby="av-t" style="width:480px;padding:24px;background:var(--crema);border-radius:28px;box-shadow:var(--sombra-lg)">
+<div style="display:flex;align-items:center;gap:14px">
+<dc-import name="Cactus" mood="lentes" size="64" hint-size="64px,73px"></dc-import>
+<div>
+<h2 id="av-t" style="font-size:22px;font-weight:900">Tus tarjetas no se guardan.</h2>
+<p style="margin-top:2px;font-size:18px;font-weight:700">¿Descargarlas antes de salir?</p>
+</div>
+</div>
+<div style="margin-top:18px;display:flex;flex-direction:column;gap:10px">
+<button class="btn btn-p" type="button" style="width:100%"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Descargar mis tarjetas</button>
+<button class="btn btn-s" type="button" style="width:100%">Continuar sin descargar</button>
+<button class="btn btn-g btn-sm" type="button" style="align-self:center">Seguir estudiando</button>
+</div>
+</div>
+</div>
+<p style="margin-top:10px;font-size:14px;font-weight:600;color:var(--suave)">Se muestra al pulsar «Cambiar tiempo» si hay tarjetas, y el mismo mensaje queda fijo al pie del panel. Al cerrar la pestaña, el navegador mostrará su propio aviso estándar: su texto no se puede personalizar.</p>
+</div>
+
+<div>
+<div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:16px">
+<div>
+<p class="cap">Estado vacío · Ideas clave</p>
+<div class="zona" style="padding:16px">
+<div class="vacio">
+<svg width="96" height="84" viewBox="0 0 96 84" fill="none" aria-hidden="true"><rect x="16" y="10" width="56" height="62" rx="12" fill="#F7EFD8" stroke="#1E5B3C" stroke-width="4"/><path d="M28 28H60M28 40H60M28 52H46" stroke="#1E5B3C" stroke-width="4" stroke-linecap="round"/><circle cx="74" cy="18" r="9" fill="#F28FA8" stroke="#1E5B3C" stroke-width="3.5"/></svg>
+<h3>Aún no hay ideas</h3>
+<p>Anota frases cortas que no quieras olvidar: una fórmula, una fecha, una definición.</p>
+<button class="btn btn-p btn-sm" type="button" style="margin-top:8px">Escribir mi primera idea</button>
+</div>
+</div>
+</div>
+<div>
+<p class="cap">Estado vacío · Repaso</p>
+<div class="zona" style="padding:16px">
+<div class="vacio">
+<svg width="96" height="84" viewBox="0 0 96 84" fill="none" aria-hidden="true"><rect x="12" y="14" width="52" height="40" rx="10" transform="rotate(-8 38 34)" fill="#E6D6A8" stroke="#1E5B3C" stroke-width="4"/><rect x="26" y="22" width="52" height="40" rx="10" fill="#F7EFD8" stroke="#1E5B3C" stroke-width="4"/><path d="M38 42H66" stroke="#1E5B3C" stroke-width="4" stroke-linecap="round"/><circle cx="78" cy="22" r="9" fill="#F28FA8" stroke="#1E5B3C" stroke-width="3.5"/></svg>
+<h3>Nada que repasar aún</h3>
+<p>Crea al menos una tarjeta y vuelve aquí. Las que no sepas volverán a aparecer.</p>
+<a class="btn btn-p btn-sm" href="03-flashcards.dc.html" style="margin-top:8px">Ir a Flashcards</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div>
+<p class="cap">Fin de la ronda · Repaso</p>
+<div class="zona" style="padding:20px 24px;display:flex;align-items:center;gap:20px">
+<dc-import name="Cactus" mood="celebra" size="120" hint-size="120px,137px"></dc-import>
+<div style="flex:1">
+<h3 style="font-size:24px;font-weight:900">¡Ronda completa!</h3>
+<p style="margin-top:4px;font-size:16px;font-weight:600;color:var(--suave)">Dominaste 5 de 6 tarjetas. La que marcaste «Dudo» saldrá primero en la próxima ronda.</p>
+<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+<button class="btn btn-p btn-sm" type="button">Repasar otra ronda</button>
+<a class="btn btn-s btn-sm" href="03-flashcards.dc.html">Volver a Flashcards</a>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":700,"height":1160}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

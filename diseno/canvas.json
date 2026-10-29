@@ -1,0 +1,41 @@
+{
+  "v": 3,
+  "createdOnFiles": { "v": 1, "at": "2026-10-29T15:00:00Z" },
+  "title": "EffectiveStudy",
+  "launch": { "view": "canvas" },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": { "x": 0, "y": 0, "w": 700, "h": 920, "title": "01 · Inicio — elegir tiempo", "is_interactive": true },
+    "02-sesion.dc.html": { "x": 780, "y": 0, "w": 700, "h": 940, "title": "02 · Sesión de estudio", "is_interactive": true },
+    "03-flashcards.dc.html": { "x": 1560, "y": 0, "w": 700, "h": 1230, "title": "03 · Flashcards", "is_interactive": true },
+    "04-ideas.dc.html": { "x": 2340, "y": 0, "w": 700, "h": 1060, "title": "04 · Ideas clave", "is_interactive": true },
+    "05-repaso.dc.html": { "x": 0, "y": 1350, "w": 700, "h": 1010, "title": "05 · Repaso", "is_interactive": true },
+    "06-descanso.dc.html": { "x": 780, "y": 1350, "w": 700, "h": 700, "title": "06 · Descanso", "is_interactive": true },
+    "07-fin-bloque.dc.html": { "x": 1560, "y": 1350, "w": 700, "h": 780, "title": "07 · Fin de bloque", "is_interactive": true },
+    "08-avisos-vacios.dc.html": { "x": 2340, "y": 1350, "w": 700, "h": 1160, "title": "08 · Aviso al salir y estados vacíos" },
+    "09-sistema-fundamentos.dc.html": { "x": 0, "y": 2630, "w": 1480, "h": 1320, "title": "Sistema · Fundamentos" },
+    "10-sistema-componentes.dc.html": { "x": 1560, "y": 2630, "w": 1480, "h": 1700, "title": "Sistema · Componentes" },
+    "Cactus.dc.html": { "x": 3120, "y": 2630, "w": 200, "h": 228, "title": "Componente · Cactus" }
+  },
+  "order": [
+    "Main.dc.html",
+    "02-sesion.dc.html",
+    "03-flashcards.dc.html",
+    "04-ideas.dc.html",
+    "05-repaso.dc.html",
+    "06-descanso.dc.html",
+    "07-fin-bloque.dc.html",
+    "08-avisos-vacios.dc.html",
+    "09-sistema-fundamentos.dc.html",
+    "10-sistema-componentes.dc.html",
+    "Cactus.dc.html"
+  ],
+  "notes": {
+    "t1": { "x": 0, "y": -280, "text": "EffectiveStudy · Pantallas", "kind": "title1", "maxW": 3040 },
+    "t2": { "x": 0, "y": 2380, "text": "EffectiveStudy · Sistema de diseño “Desierto fresco”", "kind": "title1", "maxW": 3040 },
+    "s1": { "x": 3120, "y": 0, "w": 320, "text": "Ventana objetivo: ~700 px de ancho. El cronómetro queda fijo arriba; solo el panel de abajo hace scroll.", "fill": "green" },
+    "s2": { "x": 3120, "y": 260, "w": 320, "text": "Campana suave: suena al terminar el estudio y al terminar el descanso. Solo se señala en el diseño (ícono de campana).", "fill": "pink" },
+    "s3": { "x": 3120, "y": 520, "w": 320, "text": "Prototipo navegable: pulsa Play en las pantallas con marca azul y usa «Empezar», las pestañas y «Cambiar tiempo».", "fill": "teal" }
+  },
+  "designSystems": []
+}

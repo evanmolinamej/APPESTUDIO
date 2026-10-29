@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Sistema · Fundamentos</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--menta:#E4F5EA;--crema:#F6F8F1;--cactus:#4FAE74;--bosque:#1E5B3C;--arena:#F7EFD8;--rosa:#F28FA8;--arena-borde:#E6D6A8;--menta-media:#CBE9D5;--rosa-claro:#FCE3EA;--suave:#4B6B59;--campo:#FFFFFC;--borde-campo:#5E8D72;--sombra-sm:0 2px 8px rgba(30,91,60,.10);--sombra-md:0 8px 22px rgba(30,91,60,.12);--sombra-lg:0 18px 44px rgba(30,91,60,.20)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Nunito',system-ui,sans-serif;font-size:16px;color:var(--bosque);background:var(--menta)}
+h1,h2,h3,p,ul{margin:0;padding:0}
+.mono{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace}
+.sec{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--suave);margin-bottom:12px}
+.panel{background:var(--crema);border-radius:28px;box-shadow:var(--sombra-sm);padding:24px}
+.sw{display:flex;flex-direction:column;gap:2px}
+.blk{height:84px;border-radius:20px;border:2px solid rgba(30,91,60,.18);margin-bottom:6px}
+.sw b{font-size:16px;font-weight:900}
+.sw code{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700}
+.sw span{font-size:14px;font-weight:600;color:var(--suave);line-height:1.3}
+.cr{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:2px solid var(--menta)}
+.cr .ex{flex:none;width:56px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900}
+.cr .nm{flex:1;font-size:15px;font-weight:700}
+.cr .rt{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:700;width:70px;text-align:right}
+.cr .ok{flex:none;width:112px;text-align:center;padding:3px 0;border-radius:999px;background:var(--menta-media);font-size:13px;font-weight:800}
+.cr .no{flex:none;width:112px;text-align:center;padding:3px 0;border-radius:999px;background:var(--rosa-claro);font-size:13px;font-weight:800}
+.row{display:flex;align-items:baseline;gap:14px;padding:9px 0;border-bottom:2px solid var(--menta)}
+.row b{width:150px;flex:none;font-size:15px;font-weight:900}
+.row span{flex:1;font-size:14px;font-weight:600;color:var(--suave)}
+.dem{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;font-weight:700;text-align:center}
+.dem i{display:block;background:var(--arena);border:2px solid var(--arena-borde)}
+</style>
+</helmet>
+<div style="width:1480px;height:1320px;padding:48px;background:var(--menta);overflow:hidden;display:flex;flex-direction:column;gap:32px">
+
+<div style="display:flex;align-items:center;gap:28px">
+<dc-import name="Cactus" mood="lentes" size="96" hint-size="96px,110px"></dc-import>
+<div>
+<h1 style="font-size:44px;font-weight:900">Desierto fresco · Fundamentos</h1>
+<p style="margin-top:4px;font-size:18px;font-weight:600;color:var(--suave)">Color, tipografía, forma y espaciado de EffectiveStudy. Todo texto cumple contraste mínimo 4.5:1. Ventana objetivo: 700 px.</p>
+</div>
+</div>
+
+<div>
+<p class="sec">Color · paleta base</p>
+<div style="display:grid;grid-template-columns:repeat(6, minmax(0, 1fr));gap:16px">
+<div class="sw"><div class="blk" style="background:#E4F5EA"></div><b>menta</b><code>#E4F5EA</code><span>Fondo general de la app</span></div>
+<div class="sw"><div class="blk" style="background:#F6F8F1"></div><b>crema</b><code>#F6F8F1</code><span>Zona de estudio: cronómetro y paneles</span></div>
+<div class="sw"><div class="blk" style="background:#4FAE74"></div><b>cactus</b><code>#4FAE74</code><span>Solo relleno: cactus, progreso. Nunca texto</span></div>
+<div class="sw"><div class="blk" style="background:#1E5B3C"></div><b>bosque</b><code>#1E5B3C</code><span>Texto, botones y trazos</span></div>
+<div class="sw"><div class="blk" style="background:#F7EFD8"></div><b>arena</b><code>#F7EFD8</code><span>Tarjetas y flashcards</span></div>
+<div class="sw"><div class="blk" style="background:#F28FA8"></div><b>rosa</b><code>#F28FA8</code><span>Acento: flor y detalles. Nunca texto</span></div>
+</div>
+<p class="sec" style="margin-top:20px">Color · derivados (solo apoyo)</p>
+<div style="display:grid;grid-template-columns:repeat(6, minmax(0, 1fr));gap:16px">
+<div class="sw"><div class="blk" style="background:#E6D6A8"></div><b>arena-borde</b><code>#E6D6A8</code><span>Borde de tarjetas, maceta</span></div>
+<div class="sw"><div class="blk" style="background:#CBE9D5"></div><b>menta-media</b><code>#CBE9D5</code><span>Pista de barras e insignias</span></div>
+<div class="sw"><div class="blk" style="background:#FCE3EA"></div><b>rosa-claro</b><code>#FCE3EA</code><span>Fondo del botón «No la sé»</span></div>
+<div class="sw"><div class="blk" style="background:#4B6B59"></div><b>suave</b><code>#4B6B59</code><span>Texto secundario y etiquetas</span></div>
+<div class="sw"><div class="blk" style="background:#FFFFFC"></div><b>campo</b><code>#FFFFFC</code><span>Fondo de campos de texto</span></div>
+<div class="sw"><div class="blk" style="background:#5E8D72"></div><b>borde-campo</b><code>#5E8D72</code><span>Borde de campos (3,5 : 1)</span></div>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);gap:24px">
+
+<div class="panel">
+<p class="sec">Contraste de texto</p>
+<div class="cr"><span class="ex" style="background:#F6F8F1;color:#1E5B3C">Aa</span><span class="nm">bosque sobre crema</span><span class="rt">7,5 : 1</span><span class="ok">Aprobado</span></div>
+<div class="cr"><span class="ex" style="background:#E4F5EA;color:#1E5B3C">Aa</span><span class="nm">bosque sobre menta</span><span class="rt">7,1 : 1</span><span class="ok">Aprobado</span></div>
+<div class="cr"><span class="ex" style="background:#F7EFD8;color:#1E5B3C">Aa</span><span class="nm">bosque sobre arena</span><span class="rt">7,0 : 1</span><span class="ok">Aprobado</span></div>
+<div class="cr"><span class="ex" style="background:#1E5B3C;color:#F6F8F1">Aa</span><span class="nm">crema sobre bosque (botones)</span><span class="rt">7,5 : 1</span><span class="ok">Aprobado</span></div>
+<div class="cr"><span class="ex" style="background:#F6F8F1;color:#4B6B59">Aa</span><span class="nm">suave sobre crema</span><span class="rt">5,5 : 1</span><span class="ok">Aprobado</span></div>
+<div class="cr"><span class="ex" style="background:#F7EFD8;color:#4B6B59">Aa</span><span class="nm">suave sobre arena</span><span class="rt">5,2 : 1</span><span class="ok">Aprobado</span></div>
+<div class="cr"><span class="ex" style="background:#FCE3EA;color:#1E5B3C">Aa</span><span class="nm">bosque sobre rosa-claro</span><span class="rt">6,6 : 1</span><span class="ok">Aprobado</span></div>
+<div class="cr"><span class="ex" style="background:#4FAE74;color:#1E5B3C">Aa</span><span class="nm">bosque sobre cactus</span><span class="rt">2,9 : 1</span><span class="no">No usar</span></div>
+<div class="cr"><span class="ex" style="background:#4FAE74;color:#F6F8F1">Aa</span><span class="nm">crema sobre cactus</span><span class="rt">2,6 : 1</span><span class="no">No usar</span></div>
+<div class="cr" style="border-bottom:0"><span class="ex" style="background:#F28FA8;color:#1E5B3C">Aa</span><span class="nm">bosque sobre rosa</span><span class="rt">3,5 : 1</span><span class="no">No usar</span></div>
+</div>
+
+<div class="panel">
+<p class="sec">Tipografía</p>
+<div style="display:flex;align-items:baseline;justify-content:space-between;padding-bottom:10px;border-bottom:2px solid var(--menta)">
+<span class="mono" style="font-size:88px;font-weight:800;line-height:1;letter-spacing:-.02em">14:52</span>
+<span style="font-size:14px;font-weight:700;color:var(--suave);text-align:right">JetBrains Mono 800<br>solo cronómetro y teclas</span>
+</div>
+<p style="margin-top:12px;font-size:34px;font-weight:900;line-height:1.15">¿Cuánto vas a estudiar hoy?</p>
+<p style="margin-top:6px;font-size:14px;font-weight:700;color:var(--suave)">Nunito 900 · títulos</p>
+<p style="margin-top:12px;font-size:17px;font-weight:600;line-height:1.4">Anota una pregunta y su respuesta mientras estudias. Aparecerán aquí para repasarlas.</p>
+<p style="margin-top:4px;font-size:14px;font-weight:700;color:var(--suave)">Nunito 600 · cuerpo</p>
+<div style="margin-top:14px">
+<div class="row"><b>cronómetro</b><span>Mono 800 · 116–128 px · interlineado 1 · −0,02 em</span></div>
+<div class="row"><b>título de pantalla</b><span>Nunito 900 · 32–38 px · 1,15</span></div>
+<div class="row"><b>título de panel</b><span>Nunito 900 · 19–22 px</span></div>
+<div class="row"><b>cuerpo</b><span>Nunito 600 · 16–17 px · 1,4</span></div>
+<div class="row"><b>botón / pestaña</b><span>Nunito 800 · 15–17 px (21 px en grande)</span></div>
+<div class="row" style="border-bottom:0"><b>etiqueta</b><span>Nunito 800 · 14 px · color suave. Mínimo 13 px, solo insignias</span></div>
+</div>
+</div>
+
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.2fr);gap:24px">
+
+<div class="panel">
+<p class="sec">Radios y bordes</p>
+<div style="display:flex;gap:14px;align-items:flex-end">
+<div class="dem"><i style="width:84px;height:44px;border-radius:999px"></i>999<br>botón, chip</div>
+<div class="dem"><i style="width:56px;height:56px;border-radius:32px"></i>32<br>zona</div>
+<div class="dem"><i style="width:56px;height:56px;border-radius:24px"></i>24<br>tarjeta</div>
+<div class="dem"><i style="width:56px;height:56px;border-radius:16px"></i>16<br>campo</div>
+</div>
+<p style="margin-top:14px;font-size:14px;font-weight:600;color:var(--suave)">Bordes de 2 px en tarjetas y campos; 3 px en la opción seleccionada. El cactus lleva trazo bosque de 6 px por cada 200 de ancho.</p>
+</div>
+
+<div class="panel">
+<p class="sec">Sombras</p>
+<div style="display:flex;gap:16px;align-items:flex-end">
+<div class="dem"><i style="width:64px;height:64px;border-radius:20px;box-shadow:0 2px 8px rgba(30,91,60,.10)"></i>sm<br>tarjetas</div>
+<div class="dem"><i style="width:64px;height:64px;border-radius:20px;box-shadow:0 8px 22px rgba(30,91,60,.12)"></i>md<br>zonas</div>
+<div class="dem"><i style="width:64px;height:64px;border-radius:20px;box-shadow:0 18px 44px rgba(30,91,60,.20)"></i>lg<br>aviso</div>
+</div>
+<p style="margin-top:14px;font-size:14px;font-weight:600;color:var(--suave)">Siempre en verde bosque transparente, nunca gris ni negro.</p>
+</div>
+
+<div class="panel">
+<p class="sec">Espaciado (px)</p>
+<div style="display:flex;align-items:flex-end;gap:12px">
+<div class="dem"><i style="width:8px;height:8px;background:var(--cactus);border:0;border-radius:2px"></i>4</div>
+<div class="dem"><i style="width:16px;height:16px;background:var(--cactus);border:0;border-radius:3px"></i>8</div>
+<div class="dem"><i style="width:24px;height:24px;background:var(--cactus);border:0;border-radius:4px"></i>12</div>
+<div class="dem"><i style="width:32px;height:32px;background:var(--cactus);border:0;border-radius:5px"></i>16</div>
+<div class="dem"><i style="width:48px;height:48px;background:var(--cactus);border:0;border-radius:6px"></i>24</div>
+<div class="dem"><i style="width:64px;height:64px;background:var(--cactus);border:0;border-radius:8px"></i>32</div>
+</div>
+<p style="margin-top:14px;font-size:14px;font-weight:600;color:var(--suave)">Ventana de 700 px, margen lateral 24, 16 entre zonas, 12 entre tarjetas, objetivos táctiles de 44 px o más.</p>
+</div>
+
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1480,"height":1320}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

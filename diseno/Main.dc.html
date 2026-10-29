@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Inicio · elegir tiempo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--menta:#E4F5EA;--crema:#F6F8F1;--cactus:#4FAE74;--bosque:#1E5B3C;--arena:#F7EFD8;--rosa:#F28FA8;--arena-borde:#E6D6A8;--menta-media:#CBE9D5;--rosa-claro:#FCE3EA;--suave:#4B6B59;--campo:#FFFFFC;--borde-campo:#5E8D72;--sombra-sm:0 2px 8px rgba(30,91,60,.10);--sombra-md:0 8px 22px rgba(30,91,60,.12);--sombra-lg:0 18px 44px rgba(30,91,60,.20)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Nunito',system-ui,sans-serif;font-size:16px;color:var(--bosque);background:var(--menta)}
+h1,h2,h3,p,ul{margin:0;padding:0}
+button,input,textarea,select{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border:2px solid var(--bosque);border-radius:999px;font-size:17px;font-weight:800;line-height:1;text-decoration:none;cursor:pointer;white-space:nowrap}
+.btn-p{background:var(--bosque);color:var(--crema)}
+.btn-lg{height:64px;padding:0 48px;font-size:21px}
+.btn:focus-visible,.tec:focus-visible,.campo:focus-visible{outline:3px solid var(--bosque);outline-offset:3px}
+.lbl{font-size:14px;font-weight:800;color:var(--suave)}
+.campo{border:2px solid var(--borde-campo);border-radius:16px;background:var(--campo);font-weight:800}
+.tec{display:flex;flex-direction:column;gap:8px;text-align:left;padding:18px 20px;min-height:172px;background:var(--arena);border:2px solid var(--arena-borde);border-radius:28px;box-shadow:var(--sombra-sm);cursor:pointer;color:var(--bosque)}
+.tec.on{border:3px solid var(--bosque);padding:17px 19px;box-shadow:var(--sombra-md)}
+.tec.custom{border:2px dashed var(--borde-campo);cursor:default}
+.num{font-size:36px;font-weight:900;line-height:1}
+.num span{font-size:16px;font-weight:800}
+.bar{display:flex;gap:3px;height:10px;margin-top:auto}
+.bar span{border-radius:5px}
+</style>
+</helmet>
+<div style="width:700px;height:920px;padding:0 24px 20px;background:var(--menta);display:flex;flex-direction:column;align-items:center;overflow:hidden">
+
+<div style="width:100%;height:64px;display:flex;align-items:center;justify-content:space-between">
+<div style="display:flex;align-items:center;gap:10px">
+<dc-import name="Cactus" mood="lentes" size="34" hint-size="34px,39px"></dc-import>
+<span style="font-size:20px;font-weight:900">EffectiveStudy</span>
+</div>
+<span class="lbl" style="padding:6px 14px;border:2px dashed var(--borde-campo);border-radius:999px">Sin cuentas · Nada se guarda</span>
+</div>
+
+<dc-import name="Cactus" mood="dormido" size="168" hint-size="168px,192px"></dc-import>
+<h1 style="margin-top:4px;font-size:32px;font-weight:900;text-align:center">¿Cuánto vas a estudiar hoy?</h1>
+<p style="margin-top:6px;font-size:17px;font-weight:600;color:var(--suave);text-align:center">Elige una técnica y empieza. El cactus se despierta contigo.</p>
+
+<div style="width:100%;margin-top:20px;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:14px">
+
+<button class="tec on" type="button" aria-pressed="true">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<h2 style="font-size:21px;font-weight:900">Pomodoro</h2>
+<span style="width:28px;height:28px;border-radius:50%;background:var(--bosque);color:var(--crema);display:inline-flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+</div>
+<div style="display:flex;gap:22px">
+<div><div class="num">25<span> min</span></div><div class="lbl">de estudio</div></div>
+<div><div class="num">5<span> min</span></div><div class="lbl">de descanso</div></div>
+</div>
+<div class="bar"><span style="flex:25;background:var(--cactus)"></span><span style="flex:5;background:var(--rosa)"></span></div>
+<span style="font-size:14px;font-weight:600;color:var(--suave)">Para arrancar sin pereza</span>
+</button>
+
+<button class="tec" type="button" aria-pressed="false">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<h2 style="font-size:21px;font-weight:900">Enfoque</h2>
+</div>
+<div style="display:flex;gap:22px">
+<div><div class="num">50<span> min</span></div><div class="lbl">de estudio</div></div>
+<div><div class="num">10<span> min</span></div><div class="lbl">de descanso</div></div>
+</div>
+<div class="bar"><span style="flex:50;background:var(--cactus)"></span><span style="flex:10;background:var(--rosa)"></span></div>
+<span style="font-size:14px;font-weight:600;color:var(--suave)">Para lecturas y problemas largos</span>
+</button>
+
+<button class="tec" type="button" aria-pressed="false">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<h2 style="font-size:21px;font-weight:900">Inmersión</h2>
+</div>
+<div style="display:flex;gap:22px">
+<div><div class="num">90<span> min</span></div><div class="lbl">de estudio</div></div>
+<div><div class="num">20<span> min</span></div><div class="lbl">de descanso</div></div>
+</div>
+<div class="bar"><span style="flex:90;background:var(--cactus)"></span><span style="flex:20;background:var(--rosa)"></span></div>
+<span style="font-size:14px;font-weight:600;color:var(--suave)">Para preparar un examen</span>
+</button>
+
+<div class="tec custom" role="group" aria-labelledby="t-custom">
+<h2 id="t-custom" style="font-size:21px;font-weight:900">Personalizado</h2>
+<div style="display:flex;gap:14px">
+<label style="display:flex;flex-direction:column;gap:4px"><span class="lbl">Estudio (min)</span><input class="campo" type="number" value="30" style="width:112px;height:52px;font-size:22px;text-align:center"></label>
+<label style="display:flex;flex-direction:column;gap:4px"><span class="lbl">Descanso (min)</span><input class="campo" type="number" value="10" style="width:112px;height:52px;font-size:22px;text-align:center"></label>
+</div>
+<div class="bar"><span style="flex:30;background:var(--cactus)"></span><span style="flex:10;background:var(--rosa)"></span></div>
+</div>
+
+</div>
+
+<a class="btn btn-p btn-lg" href="02-sesion.dc.html" style="margin-top:22px"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>Empezar</a>
+<p style="margin-top:8px;font-size:15px;font-weight:700;color:var(--suave)">Pomodoro 25/5 · 25 min de estudio y 5 de descanso</p>
+<p style="margin-top:12px;font-size:14px;font-weight:600;color:var(--suave)">Tus tarjetas viven solo en esta pestaña. Puedes descargarlas cuando quieras.</p>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":700,"height":920}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

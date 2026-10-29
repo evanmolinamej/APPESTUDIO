@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Flashcards</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--menta:#E4F5EA;--crema:#F6F8F1;--cactus:#4FAE74;--bosque:#1E5B3C;--arena:#F7EFD8;--rosa:#F28FA8;--arena-borde:#E6D6A8;--menta-media:#CBE9D5;--rosa-claro:#FCE3EA;--suave:#4B6B59;--campo:#FFFFFC;--borde-campo:#5E8D72;--sombra-sm:0 2px 8px rgba(30,91,60,.10);--sombra-md:0 8px 22px rgba(30,91,60,.12);--sombra-lg:0 18px 44px rgba(30,91,60,.20)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Nunito',system-ui,sans-serif;font-size:16px;color:var(--bosque);background:var(--menta)}
+h1,h2,h3,p,ul{margin:0;padding:0}
+button,input,textarea,select{font:inherit;color:inherit}
+.mono{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border:2px solid var(--bosque);border-radius:999px;font-size:17px;font-weight:800;line-height:1;text-decoration:none;cursor:pointer;white-space:nowrap}
+.btn-p{background:var(--bosque);color:var(--crema)}
+.btn-s{background:var(--crema);color:var(--bosque)}
+.btn-g{background:transparent;border-color:transparent;color:var(--bosque);padding:0 14px;text-decoration:underline;text-underline-offset:4px}
+.btn-sm{height:44px;padding:0 18px;font-size:15px}
+.btn:focus-visible,.tab:focus-visible,.chip:focus-visible,.campo:focus-visible,.fc:focus-visible,.icon-btn:focus-visible{outline:3px solid var(--bosque);outline-offset:3px}
+.zona{background:var(--crema);border-radius:32px;box-shadow:var(--sombra-md)}
+.card{background:var(--arena);border:2px solid var(--arena-borde);border-radius:24px;box-shadow:var(--sombra-sm)}
+.chip{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--arena-borde);background:var(--arena);font-size:15px;font-weight:800;cursor:pointer;color:var(--bosque)}
+.chip.on{background:var(--bosque);border-color:var(--bosque);color:var(--crema)}
+.chip.nuevo{background:transparent;border:2px dashed var(--borde-campo)}
+.tabs{display:flex;gap:4px;padding:5px;background:var(--menta);border-radius:999px}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:999px;font-size:16px;font-weight:800;text-decoration:none;color:var(--bosque)}
+.tab.on{background:var(--bosque);color:var(--crema)}
+.badge{min-width:24px;height:24px;padding:0 7px;border-radius:12px;background:var(--menta-media);color:var(--bosque);font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
+.tab.on .badge,.chip.on .badge{background:var(--crema);color:var(--bosque)}
+.campo{width:100%;border:2px solid var(--borde-campo);border-radius:16px;background:var(--campo);padding:12px 14px;font-size:16px;font-weight:600;resize:none}
+.campo::placeholder{color:var(--suave);opacity:1}
+.lbl{font-size:14px;font-weight:800;color:var(--suave)}
+kbd{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;padding:1px 6px;border:2px solid var(--arena-borde);border-radius:6px;background:var(--crema);color:var(--bosque)}
+.icon-btn{width:44px;height:44px;border:0;background:transparent;color:var(--bosque);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.fc{display:flex;flex-direction:column;align-items:flex-start;gap:8px;width:100%;min-height:128px;padding:14px 16px;text-align:left;background:var(--arena);border:2px solid var(--arena-borde);border-radius:24px;box-shadow:var(--sombra-sm);cursor:pointer;color:var(--bosque)}
+.fc.back{background:var(--menta);border-color:var(--bosque)}
+.fc .q{font-size:17px;font-weight:800;line-height:1.3}
+.fc .hint{margin-top:auto;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--suave)}
+.pill{padding:3px 10px;border-radius:999px;background:var(--crema);font-size:13px;font-weight:800}
+.pill.dark{background:var(--bosque);color:var(--crema)}
+</style>
+</helmet>
+<div style="width:700px;height:1230px;padding:0 24px 24px;background:var(--menta);overflow:hidden">
+
+<div style="height:64px;display:flex;align-items:center;justify-content:space-between">
+<div style="display:flex;align-items:center;gap:10px">
+<dc-import name="Cactus" mood="lentes" size="34" hint-size="34px,39px"></dc-import>
+<span style="font-size:20px;font-weight:900">EffectiveStudy</span>
+</div>
+<span class="lbl" style="padding:6px 14px;background:var(--crema);border-radius:999px">Pomodoro 25/5</span>
+</div>
+
+<section class="zona" style="padding:20px 24px 22px" aria-label="Cronómetro">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<span style="display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:800"><span style="width:10px;height:10px;border-radius:50%;background:var(--cactus)"></span>Estudiando</span>
+<span class="lbl">Bloque 1</span>
+</div>
+<div style="margin-top:6px;display:flex;align-items:center;justify-content:center;gap:20px">
+<dc-import name="Cactus" mood="lentes" size="124" hint-size="124px,141px"></dc-import>
+<div class="mono" role="timer" aria-label="14 minutos 52 segundos" style="font-size:116px;font-weight:800;line-height:1;letter-spacing:-.02em">14:52</div>
+</div>
+<div style="margin-top:14px;height:12px;border-radius:6px;background:var(--menta-media);overflow:hidden"><div style="width:40%;height:100%;border-radius:6px;background:var(--cactus)"></div></div>
+<div style="margin-top:16px;display:flex;align-items:center;gap:12px">
+<button class="btn btn-p" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>Pausar</button>
+<button class="btn btn-s" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4.5h4.5"/></svg>Reiniciar</button>
+<span style="flex:1"></span>
+<a class="btn btn-g btn-sm" href="Main.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Cambiar tiempo</a>
+</div>
+</section>
+
+<section class="zona" style="margin-top:16px;padding:16px 20px 20px" aria-label="Panel de estudio">
+<nav class="tabs" aria-label="Pestañas del panel">
+<a class="tab on" href="03-flashcards.dc.html" aria-current="page">Flashcards <span class="badge">6</span></a>
+<a class="tab" href="04-ideas.dc.html">Ideas clave <span class="badge">5</span></a>
+<a class="tab" href="05-repaso.dc.html">Repaso</a>
+</nav>
+
+<div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="Filtrar por materia">
+<button class="chip" type="button" aria-pressed="false">Todas <span class="badge">6</span></button>
+<button class="chip on" type="button" aria-pressed="true">Microeconomía <span class="badge">3</span></button>
+<button class="chip" type="button" aria-pressed="false">Contabilidad <span class="badge">2</span></button>
+<button class="chip" type="button" aria-pressed="false">Estadística <span class="badge">1</span></button>
+<button class="chip nuevo" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Nueva materia</button>
+</div>
+
+<div class="card" style="margin-top:12px;padding:14px 16px 16px">
+<div style="display:flex;align-items:baseline;justify-content:space-between">
+<h3 style="font-size:17px;font-weight:900">Nueva tarjeta</h3>
+<span class="lbl">en Microeconomía</span>
+</div>
+<div style="margin-top:10px;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:12px">
+<label style="display:flex;flex-direction:column;gap:4px"><span class="lbl">Pregunta</span><textarea class="campo" rows="2" placeholder="¿Qué quieres recordar?" style="height:72px"></textarea></label>
+<label style="display:flex;flex-direction:column;gap:4px"><span class="lbl">Respuesta</span><textarea class="campo" rows="2" placeholder="Escríbela con tus palabras" style="height:72px"></textarea></label>
+</div>
+<div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between">
+<span class="lbl"><kbd>Ctrl</kbd> + <kbd>Enter</kbd> para guardar</span>
+<button class="btn btn-p btn-sm" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Añadir tarjeta</button>
+</div>
+</div>
+
+<div style="margin-top:12px;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:12px">
+
+<div style="position:relative">
+<button class="fc" type="button" aria-label="Voltear tarjeta: ¿Qué es el costo de oportunidad?">
+<span class="pill">Microeconomía</span>
+<span class="q">¿Qué es el costo de oportunidad?</span>
+<span class="hint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>Toca para ver la respuesta</span>
+</button>
+<button class="icon-btn" type="button" aria-label="Borrar tarjeta" style="position:absolute;top:2px;right:2px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button>
+</div>
+
+<div style="position:relative">
+<button class="fc back" type="button" aria-label="Voltear tarjeta: mostrar la pregunta">
+<span class="pill dark">Respuesta</span>
+<span class="q">Lo que se sacrifica al elegir algo: el valor de la mejor alternativa que dejas.</span>
+<span class="hint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>Toca para ver la pregunta</span>
+</button>
+<button class="icon-btn" type="button" aria-label="Borrar tarjeta" style="position:absolute;top:2px;right:2px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button>
+</div>
+
+<div style="position:relative">
+<button class="fc" type="button" aria-label="Voltear tarjeta: ¿Qué dice la ley de la demanda?">
+<span class="pill">Microeconomía</span>
+<span class="q">¿Qué dice la ley de la demanda?</span>
+<span class="hint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>Toca para ver la respuesta</span>
+</button>
+<button class="icon-btn" type="button" aria-label="Borrar tarjeta" style="position:absolute;top:2px;right:2px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button>
+</div>
+
+</div>
+
+<div style="margin-top:16px;display:flex;align-items:center;gap:14px">
+<button class="btn btn-s btn-sm" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Descargar mis tarjetas</button>
+<span style="font-size:14px;font-weight:600;color:var(--suave)">Las tarjetas no se guardan al cerrar la pestaña.</span>
+</div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":700,"height":1230}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

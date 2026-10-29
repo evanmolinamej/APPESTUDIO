@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EffectiveStudy · Fase 1 (página de prueba)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main class="prueba">
+
+  <h1>EffectiveStudy · Fase 1: base</h1>
+  <p class="lbl">Página de prueba temporal. En la Fase 2 se reemplaza por el Inicio.</p>
+
+  <section class="zona" aria-label="Cactus">
+    <p class="sec">Mascota · 4 estados</p>
+    <div class="cactus-fila">
+      <div class="cactus-celda" data-cactus="dormido" data-tam="120"><h3>Dormido</h3><p>Inicio</p></div>
+      <div class="cactus-celda" data-cactus="lentes" data-tam="120"><h3>Con lentes</h3><p>Estudio</p></div>
+      <div class="cactus-celda" data-cactus="relajado" data-tam="120"><h3>Relajado</h3><p>Descanso</p></div>
+      <div class="cactus-celda" data-cactus="celebra" data-tam="120"><h3>Celebrando</h3><p>Fin de bloque</p></div>
+    </div>
+  </section>
+
+  <section class="zona" aria-label="Cambio de estado">
+    <p class="sec">Cambio con fundido de 250 ms</p>
+    <div style="display:flex;align-items:center;gap:20px">
+      <span id="cactus-prueba"></span>
+      <div class="botones-fila" role="group" aria-label="Elegir estado del cactus">
+        <button class="btn btn-s btn-sm" type="button" data-estado="dormido">Dormido</button>
+        <button class="btn btn-s btn-sm" type="button" data-estado="lentes">Lentes</button>
+        <button class="btn btn-s btn-sm" type="button" data-estado="relajado">Relajado</button>
+        <button class="btn btn-s btn-sm" type="button" data-estado="celebra">Celebra</button>
+      </div>
+    </div>
+    <p class="lbl" style="margin-top:12px">Cactus pequeño del encabezado (34 px, el mínimo permitido es 32): <span id="cactus-mini" style="vertical-align:middle"></span></p>
+  </section>
+
+  <section class="zona" aria-label="Botones">
+    <p class="sec">Botones · normal, hover, foco, deshabilitado</p>
+    <div class="botones-fila">
+      <button class="btn btn-p" type="button">Primario</button>
+      <button class="btn btn-p forzar-hover" type="button">Hover</button>
+      <button class="btn btn-p forzar-foco" type="button">Foco</button>
+      <button class="btn btn-p" type="button" disabled>Deshabilitado</button>
+    </div>
+    <div class="botones-fila">
+      <button class="btn btn-s" type="button">Secundario</button>
+      <button class="btn btn-s forzar-hover" type="button">Hover</button>
+      <button class="btn btn-s forzar-foco" type="button">Foco</button>
+      <button class="btn btn-s" type="button" disabled>Deshabilitado</button>
+    </div>
+    <div class="botones-fila">
+      <button class="btn btn-g btn-sm" type="button">Texto</button>
+      <button class="btn btn-g btn-sm" type="button" style="background:var(--menta-media)">Hover</button>
+      <button class="btn btn-g btn-sm forzar-foco" type="button">Foco</button>
+      <button class="btn btn-g btn-sm" type="button" disabled>Deshabilitado</button>
+    </div>
+    <div class="botones-fila">
+      <button class="btn btn-p btn-lg" type="button">Grande 64</button>
+      <button class="btn btn-p" type="button">Normal 52</button>
+      <button class="btn btn-p btn-sm" type="button">Pequeño 44</button>
+    </div>
+  </section>
+
+  <section class="zona" aria-label="Tipografía">
+    <p class="sec">Tipografía</p>
+    <div class="mono cronometro-prueba">14:52</div>
+    <div class="tipo-fila"><span class="lbl">JetBrains Mono 800 · solo cronómetro</span></div>
+    <div class="tipo-fila"><p style="font-size:32px;font-weight:900;line-height:1.15">¿Cuánto vas a estudiar hoy?</p><span class="lbl">Nunito 900 · título de pantalla</span></div>
+    <div class="tipo-fila"><p style="font-size:17px;font-weight:600;line-height:1.4">Anota una pregunta y su respuesta mientras estudias. Aparecerán aquí para repasarlas.</p><span class="lbl">Nunito 600 · cuerpo</span></div>
+  </section>
+
+  <section class="zona" aria-label="Paleta">
+    <p class="sec">Colores</p>
+    <div id="paleta" style="display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:10px"></div>
+  </section>
+
+</main>
+
+<!-- Scripts clásicos (sin módulos) para que abra con doble clic. El orden importa. -->
+<script src="js/cactus.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

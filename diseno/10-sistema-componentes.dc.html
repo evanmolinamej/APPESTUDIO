@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Sistema · Componentes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--menta:#E4F5EA;--crema:#F6F8F1;--cactus:#4FAE74;--bosque:#1E5B3C;--arena:#F7EFD8;--rosa:#F28FA8;--arena-borde:#E6D6A8;--menta-media:#CBE9D5;--rosa-claro:#FCE3EA;--suave:#4B6B59;--campo:#FFFFFC;--borde-campo:#5E8D72;--sombra-sm:0 2px 8px rgba(30,91,60,.10);--sombra-md:0 8px 22px rgba(30,91,60,.12);--sombra-lg:0 18px 44px rgba(30,91,60,.20)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Nunito',system-ui,sans-serif;font-size:16px;color:var(--bosque);background:var(--menta)}
+h1,h2,h3,p,ul{margin:0;padding:0}
+button,input,textarea,select{font:inherit;color:inherit}
+.mono{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace}
+.sec{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--suave);margin-bottom:12px}
+.panel{background:var(--crema);border-radius:28px;box-shadow:var(--sombra-sm);padding:24px}
+.lbl{font-size:14px;font-weight:800;color:var(--suave)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border:2px solid var(--bosque);border-radius:999px;font-size:17px;font-weight:800;line-height:1;text-decoration:none;cursor:pointer;white-space:nowrap}
+.btn-p{background:var(--bosque);color:var(--crema)}
+.btn-s{background:var(--crema);color:var(--bosque)}
+.btn-g{background:transparent;border-color:transparent;color:var(--bosque);padding:0 14px;text-decoration:underline;text-underline-offset:4px}
+.btn-sm{height:44px;padding:0 18px;font-size:15px}
+.btn-lg{height:64px;padding:0 44px;font-size:21px}
+.btn:disabled{background:var(--menta-media);border-color:var(--menta-media);color:var(--suave);cursor:not-allowed}
+.chip{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--arena-borde);background:var(--arena);font-size:15px;font-weight:800;cursor:pointer;color:var(--bosque)}
+.chip.on{background:var(--bosque);border-color:var(--bosque);color:var(--crema)}
+.chip.nuevo{background:transparent;border:2px dashed var(--borde-campo)}
+.tabs{display:flex;gap:4px;padding:5px;background:var(--menta);border-radius:999px}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:999px;font-size:16px;font-weight:800;text-decoration:none;color:var(--bosque)}
+.tab.on{background:var(--bosque);color:var(--crema)}
+.badge{min-width:24px;height:24px;padding:0 7px;border-radius:12px;background:var(--menta-media);color:var(--bosque);font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
+.tab.on .badge,.chip.on .badge{background:var(--crema);color:var(--bosque)}
+.campo{width:100%;height:52px;border:2px solid var(--borde-campo);border-radius:16px;background:var(--campo);padding:0 14px;font-size:16px;font-weight:600}
+.campo::placeholder{color:var(--suave);opacity:1}
+.campo:disabled{background:var(--menta-media);border-color:var(--menta-media);color:var(--suave)}
+.tec{display:flex;flex-direction:column;gap:8px;text-align:left;padding:18px 20px;min-height:172px;background:var(--arena);border:2px solid var(--arena-borde);border-radius:28px;box-shadow:var(--sombra-sm);cursor:pointer;color:var(--bosque)}
+.tec.on{border:3px solid var(--bosque);padding:17px 19px;box-shadow:var(--sombra-md)}
+.num{font-size:36px;font-weight:900;line-height:1}
+.num span{font-size:16px;font-weight:800}
+.bar{display:flex;gap:3px;height:10px;margin-top:auto}
+.bar span{border-radius:5px}
+.fc{display:flex;flex-direction:column;align-items:flex-start;gap:8px;width:100%;min-height:128px;padding:14px 16px;text-align:left;background:var(--arena);border:2px solid var(--arena-borde);border-radius:24px;box-shadow:var(--sombra-sm);cursor:pointer;color:var(--bosque)}
+.fc.back{background:var(--menta);border-color:var(--bosque)}
+.fc .q{font-size:17px;font-weight:800;line-height:1.3}
+.fc .hint{margin-top:auto;font-size:13px;font-weight:700;color:var(--suave)}
+.pill{padding:3px 10px;border-radius:999px;background:var(--crema);font-size:13px;font-weight:800}
+.pill.dark{background:var(--bosque);color:var(--crema)}
+.idea{display:flex;align-items:center;gap:12px;min-height:56px;padding:6px 16px;background:var(--arena);border:2px solid var(--arena-borde);border-radius:18px;box-shadow:var(--sombra-sm);font-size:16px;font-weight:700}
+.idea .dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--cactus)}
+.rate{display:flex;align-items:center;justify-content:center;gap:8px;height:60px;border:2px solid var(--bosque);border-radius:20px;font-size:17px;font-weight:800;color:var(--bosque)}
+.rate.si{background:var(--bosque);color:var(--crema)}
+.rate.dudo{background:var(--arena)}
+.rate.no{background:var(--rosa-claro)}
+kbd{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;padding:1px 6px;border:2px solid currentColor;border-radius:6px;background:transparent;color:inherit}
+.row{display:flex;align-items:baseline;gap:14px;padding:9px 0;border-bottom:2px solid var(--menta)}
+.row b{width:150px;flex:none;font-size:15px;font-weight:900}
+.row span{flex:1;font-size:14px;font-weight:600;color:var(--suave)}
+.hd{font-size:14px;font-weight:800;color:var(--suave);text-align:center}
+</style>
+</helmet>
+<div style="width:1480px;height:1700px;padding:48px;background:var(--menta);overflow:hidden;display:flex;flex-direction:column;gap:32px">
+
+<div>
+<h1 style="font-size:44px;font-weight:900">Desierto fresco · Componentes</h1>
+<p style="margin-top:4px;font-size:18px;font-weight:600;color:var(--suave)">Cada pieza usa los nombres de clase y variables CSS de las pantallas, para que el código salga igual que el diseño.</p>
+</div>
+
+<div>
+<p class="sec">Mascota · estados del cactus</p>
+<div style="display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:16px">
+<div class="panel" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px">
+<dc-import name="Cactus" mood="dormido" size="150" hint-size="150px,171px"></dc-import>
+<h3 style="margin-top:8px;font-size:19px;font-weight:900">Dormido</h3>
+<p style="font-size:15px;font-weight:700">Pantalla de inicio</p>
+<p style="font-size:14px;font-weight:600;color:var(--suave)">Ojos cerrados y «z z z». Se despierta al pulsar Empezar.</p>
+</div>
+<div class="panel" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px">
+<dc-import name="Cactus" mood="lentes" size="150" hint-size="150px,171px"></dc-import>
+<h3 style="margin-top:8px;font-size:19px;font-weight:900">Con lentes</h3>
+<p style="font-size:15px;font-weight:700">Sesión de estudio</p>
+<p style="font-size:14px;font-weight:600;color:var(--suave)">Lentes redondos y mirada hacia abajo. Acompaña al cronómetro.</p>
+</div>
+<div class="panel" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px">
+<dc-import name="Cactus" mood="relajado" size="150" hint-size="150px,171px"></dc-import>
+<h3 style="margin-top:8px;font-size:19px;font-weight:900">Relajado</h3>
+<p style="font-size:15px;font-weight:700">Descanso</p>
+<p style="font-size:14px;font-weight:600;color:var(--suave)">Ojos felices y una taza de té con vapor.</p>
+</div>
+<div class="panel" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px">
+<dc-import name="Cactus" mood="celebra" size="150" hint-size="150px,171px"></dc-import>
+<h3 style="margin-top:8px;font-size:19px;font-weight:900">Celebrando</h3>
+<p style="font-size:15px;font-weight:700">Fin de bloque</p>
+<p style="font-size:14px;font-weight:600;color:var(--suave)">Brazos arriba, flor rosa y confeti. Es el único con flor.</p>
+</div>
+</div>
+<p style="margin-top:10px;font-size:14px;font-weight:600;color:var(--suave)">Reglas: un solo cactus grande por pantalla; tamaño mínimo 32 px; solo sobre menta, crema o arena; nunca recolorear; el cambio de estado es un fundido de 250 ms.</p>
+</div>
+
+<div class="panel">
+<p class="sec">Botones</p>
+<div style="display:grid;grid-template-columns:150px repeat(4, minmax(0, 1fr));gap:14px 16px;align-items:center">
+<span></span><span class="hd">Normal</span><span class="hd">Hover</span><span class="hd">Foco (teclado)</span><span class="hd">Deshabilitado</span>
+<span class="lbl">Primario</span>
+<div style="text-align:center"><button class="btn btn-p" type="button">Empezar</button></div>
+<div style="text-align:center"><button class="btn btn-p" type="button" style="background:#174A31">Empezar</button></div>
+<div style="text-align:center"><button class="btn btn-p" type="button" style="outline:3px solid var(--bosque);outline-offset:3px">Empezar</button></div>
+<div style="text-align:center"><button class="btn btn-p" type="button" disabled>Empezar</button></div>
+<span class="lbl">Secundario</span>
+<div style="text-align:center"><button class="btn btn-s" type="button">Reiniciar</button></div>
+<div style="text-align:center"><button class="btn btn-s" type="button" style="background:var(--arena)">Reiniciar</button></div>
+<div style="text-align:center"><button class="btn btn-s" type="button" style="outline:3px solid var(--bosque);outline-offset:3px">Reiniciar</button></div>
+<div style="text-align:center"><button class="btn btn-s" type="button" disabled>Reiniciar</button></div>
+<span class="lbl">Texto</span>
+<div style="text-align:center"><button class="btn btn-g btn-sm" type="button">Cambiar tiempo</button></div>
+<div style="text-align:center"><button class="btn btn-g btn-sm" type="button" style="background:var(--menta-media)">Cambiar tiempo</button></div>
+<div style="text-align:center"><button class="btn btn-g btn-sm" type="button" style="outline:3px solid var(--bosque);outline-offset:3px">Cambiar tiempo</button></div>
+<div style="text-align:center"><button class="btn btn-g btn-sm" type="button" disabled>Cambiar tiempo</button></div>
+<span class="lbl">Tamaños</span>
+<div style="text-align:center"><button class="btn btn-p btn-lg" type="button">Grande 64</button></div>
+<div style="text-align:center"><button class="btn btn-p" type="button">Normal 52</button></div>
+<div style="text-align:center"><button class="btn btn-p btn-sm" type="button">Pequeño 44</button></div>
+<span class="lbl" style="text-align:center">Nunca menos de 44 px de alto</span>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:24px">
+<div class="panel">
+<p class="sec">Chips de materia</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<button class="chip" type="button">Contabilidad <span class="badge">2</span></button>
+<button class="chip on" type="button">Microeconomía <span class="badge">3</span></button>
+<button class="chip nuevo" type="button">+ Nueva materia</button>
+</div>
+<p class="sec" style="margin-top:20px">Pestañas</p>
+<nav class="tabs" aria-label="Ejemplo de pestañas">
+<a class="tab on" href="#">Flashcards <span class="badge">6</span></a>
+<a class="tab" href="#">Ideas clave <span class="badge">5</span></a>
+<a class="tab" href="#">Repaso</a>
+</nav>
+</div>
+<div class="panel">
+<p class="sec">Campos</p>
+<div style="display:flex;flex-direction:column;gap:12px">
+<label style="display:flex;flex-direction:column;gap:4px"><span class="lbl">Normal</span><input class="campo" type="text" placeholder="Nombre de la materia"></label>
+<label style="display:flex;flex-direction:column;gap:4px"><span class="lbl">Con foco</span><input class="campo" type="text" value="Microeconomía" style="outline:3px solid var(--bosque);outline-offset:3px"></label>
+<label style="display:flex;flex-direction:column;gap:4px"><span class="lbl">Deshabilitado</span><input class="campo" type="text" placeholder="No disponible" disabled></label>
+</div>
+</div>
+<div class="panel">
+<p class="sec">Botones de repaso</p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div class="rate si">La sé <kbd>1</kbd></div>
+<div class="rate dudo">Dudo <kbd>2</kbd></div>
+<div class="rate no">No la sé <kbd>3</kbd></div>
+</div>
+<p style="margin-top:12px;font-size:14px;font-weight:600;color:var(--suave)">Se distinguen por relleno, ícono y orden, no solo por color.</p>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:24px">
+<div class="panel">
+<p class="sec">Tarjeta de técnica</p>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div class="tec on">
+<h3 style="font-size:21px;font-weight:900">Pomodoro · seleccionada</h3>
+<div class="num">25<span> min</span></div>
+<div class="bar"><span style="flex:25;background:var(--cactus)"></span><span style="flex:5;background:var(--rosa)"></span></div>
+</div>
+<div class="tec" style="min-height:0">
+<h3 style="font-size:21px;font-weight:900">Enfoque · normal</h3>
+<div class="bar" style="margin-top:0"><span style="flex:50;background:var(--cactus)"></span><span style="flex:10;background:var(--rosa)"></span></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<p class="sec">Flashcard · frente y reverso</p>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div class="fc"><span class="pill">Microeconomía</span><span class="q">¿Qué es el costo de oportunidad?</span><span class="hint">Toca para ver la respuesta</span></div>
+<div class="fc back"><span class="pill dark">Respuesta</span><span class="q">El valor de la mejor alternativa que dejas.</span><span class="hint">Toca para ver la pregunta</span></div>
+</div>
+</div>
+<div class="panel">
+<p class="sec">Idea clave y aviso breve</p>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div class="idea"><span class="dot"></span>Escasez: recursos limitados, deseos ilimitados.</div>
+<div style="display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:4px 8px 4px 18px;background:var(--bosque);color:var(--crema);border-radius:18px;box-shadow:var(--sombra-lg)"><span style="font-size:15px;font-weight:700">Idea borrada</span><span style="font-size:15px;font-weight:800;text-decoration:underline;text-underline-offset:4px;padding:0 14px">Deshacer</span></div>
+</div>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);gap:24px">
+<div class="panel">
+<p class="sec">Movimiento</p>
+<div class="row"><b>hover y foco</b><span>150 ms, solo color y sombra</span></div>
+<div class="row"><b>voltear tarjeta</b><span>350 ms, giro vertical sobre el eje Y, ease-in-out</span></div>
+<div class="row"><b>cambio de cactus</b><span>fundido de 250 ms</span></div>
+<div class="row" style="border-bottom:0"><b>movimiento reducido</b><span>sin giro: la tarjeta cambia con un fundido corto</span></div>
+</div>
+<div class="panel">
+<p class="sec">Sonido</p>
+<div class="row"><b>campana suave</b><span>una sola vez, al terminar el estudio y al terminar el descanso</span></div>
+<div class="row"><b>volumen</b><span>bajo; nunca suena si la pestaña está en silencio</span></div>
+<div class="row" style="border-bottom:0"><b>en el diseño</b><span>se señala con la etiqueta «Campana suave» (ícono de campana)</span></div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1480,"height":1700}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

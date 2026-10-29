@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ideas clave</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--menta:#E4F5EA;--crema:#F6F8F1;--cactus:#4FAE74;--bosque:#1E5B3C;--arena:#F7EFD8;--rosa:#F28FA8;--arena-borde:#E6D6A8;--menta-media:#CBE9D5;--rosa-claro:#FCE3EA;--suave:#4B6B59;--campo:#FFFFFC;--borde-campo:#5E8D72;--sombra-sm:0 2px 8px rgba(30,91,60,.10);--sombra-md:0 8px 22px rgba(30,91,60,.12);--sombra-lg:0 18px 44px rgba(30,91,60,.20)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Nunito',system-ui,sans-serif;font-size:16px;color:var(--bosque);background:var(--menta)}
+h1,h2,h3,p,ul{margin:0;padding:0}
+button,input,textarea,select{font:inherit;color:inherit}
+.mono{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border:2px solid var(--bosque);border-radius:999px;font-size:17px;font-weight:800;line-height:1;text-decoration:none;cursor:pointer;white-space:nowrap}
+.btn-p{background:var(--bosque);color:var(--crema)}
+.btn-s{background:var(--crema);color:var(--bosque)}
+.btn-g{background:transparent;border-color:transparent;color:var(--bosque);padding:0 14px;text-decoration:underline;text-underline-offset:4px}
+.btn-sm{height:44px;padding:0 18px;font-size:15px}
+.btn:focus-visible,.tab:focus-visible,.chip:focus-visible,.campo:focus-visible,.icon-btn:focus-visible{outline:3px solid var(--bosque);outline-offset:3px}
+.zona{background:var(--crema);border-radius:32px;box-shadow:var(--sombra-md)}
+.chip{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--arena-borde);background:var(--arena);font-size:15px;font-weight:800;cursor:pointer;color:var(--bosque)}
+.chip.on{background:var(--bosque);border-color:var(--bosque);color:var(--crema)}
+.chip.nuevo{background:transparent;border:2px dashed var(--borde-campo)}
+.tabs{display:flex;gap:4px;padding:5px;background:var(--menta);border-radius:999px}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:999px;font-size:16px;font-weight:800;text-decoration:none;color:var(--bosque)}
+.tab.on{background:var(--bosque);color:var(--crema)}
+.badge{min-width:24px;height:24px;padding:0 7px;border-radius:12px;background:var(--menta-media);color:var(--bosque);font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
+.tab.on .badge,.chip.on .badge{background:var(--crema);color:var(--bosque)}
+.campo{width:100%;border:2px solid var(--borde-campo);border-radius:16px;background:var(--campo);padding:12px 14px;font-size:16px;font-weight:600}
+.campo::placeholder{color:var(--suave);opacity:1}
+.lbl{font-size:14px;font-weight:800;color:var(--suave)}
+.icon-btn{width:44px;height:44px;border:0;background:transparent;color:var(--bosque);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.idea{display:flex;align-items:center;gap:12px;min-height:56px;padding:6px 6px 6px 16px;background:var(--arena);border:2px solid var(--arena-borde);border-radius:18px;box-shadow:var(--sombra-sm);list-style:none}
+.idea .dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--cactus)}
+.idea .txt{flex:1;font-size:16px;font-weight:700;line-height:1.35}
+</style>
+</helmet>
+<div style="width:700px;height:1060px;padding:0 24px 24px;background:var(--menta);overflow:hidden">
+
+<div style="height:64px;display:flex;align-items:center;justify-content:space-between">
+<div style="display:flex;align-items:center;gap:10px">
+<dc-import name="Cactus" mood="lentes" size="34" hint-size="34px,39px"></dc-import>
+<span style="font-size:20px;font-weight:900">EffectiveStudy</span>
+</div>
+<span class="lbl" style="padding:6px 14px;background:var(--crema);border-radius:999px">Pomodoro 25/5</span>
+</div>
+
+<section class="zona" style="padding:20px 24px 22px" aria-label="Cronómetro">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<span style="display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:800"><span style="width:10px;height:10px;border-radius:50%;background:var(--cactus)"></span>Estudiando</span>
+<span class="lbl">Bloque 1</span>
+</div>
+<div style="margin-top:6px;display:flex;align-items:center;justify-content:center;gap:20px">
+<dc-import name="Cactus" mood="lentes" size="124" hint-size="124px,141px"></dc-import>
+<div class="mono" role="timer" aria-label="14 minutos 52 segundos" style="font-size:116px;font-weight:800;line-height:1;letter-spacing:-.02em">14:52</div>
+</div>
+<div style="margin-top:14px;height:12px;border-radius:6px;background:var(--menta-media);overflow:hidden"><div style="width:40%;height:100%;border-radius:6px;background:var(--cactus)"></div></div>
+<div style="margin-top:16px;display:flex;align-items:center;gap:12px">
+<button class="btn btn-p" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>Pausar</button>
+<button class="btn btn-s" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4.5h4.5"/></svg>Reiniciar</button>
+<span style="flex:1"></span>
+<a class="btn btn-g btn-sm" href="Main.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Cambiar tiempo</a>
+</div>
+</section>
+
+<section class="zona" style="margin-top:16px;padding:16px 20px 20px" aria-label="Panel de estudio">
+<nav class="tabs" aria-label="Pestañas del panel">
+<a class="tab" href="03-flashcards.dc.html">Flashcards <span class="badge">6</span></a>
+<a class="tab on" href="04-ideas.dc.html" aria-current="page">Ideas clave <span class="badge">5</span></a>
+<a class="tab" href="05-repaso.dc.html">Repaso</a>
+</nav>
+
+<div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="Filtrar por materia">
+<button class="chip" type="button" aria-pressed="false">Todas <span class="badge">5</span></button>
+<button class="chip on" type="button" aria-pressed="true">Microeconomía <span class="badge">3</span></button>
+<button class="chip" type="button" aria-pressed="false">Contabilidad <span class="badge">2</span></button>
+<button class="chip nuevo" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Nueva materia</button>
+</div>
+
+<div style="margin-top:14px;display:flex;align-items:flex-end;gap:10px">
+<div style="flex:1;display:flex;flex-direction:column;gap:4px">
+<label for="idea" class="lbl">Nueva idea en Microeconomía</label>
+<input id="idea" class="campo" type="text" maxlength="120" placeholder="Una frase corta que no quieras olvidar" style="height:52px">
+</div>
+<button class="btn btn-p btn-sm" type="button" style="height:52px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Agregar</button>
+</div>
+<p class="lbl" style="margin-top:4px;text-align:right;font-weight:700">Enter para agregar · 0 / 120</p>
+
+<ul style="margin-top:8px;display:flex;flex-direction:column;gap:10px">
+<li class="idea"><span class="dot"></span><span class="txt">Escasez: recursos limitados, deseos ilimitados.</span><button class="icon-btn" type="button" aria-label="Borrar idea"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button></li>
+<li class="idea"><span class="dot"></span><span class="txt">Costo de oportunidad = la mejor alternativa que dejo ir.</span><button class="icon-btn" type="button" aria-label="Borrar idea"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button></li>
+<li class="idea"><span class="dot"></span><span class="txt">Equilibrio: el precio donde oferta y demanda se igualan.</span><button class="icon-btn" type="button" aria-label="Borrar idea"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button></li>
+</ul>
+
+<div role="status" style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:4px 8px 4px 18px;background:var(--bosque);color:var(--crema);border-radius:18px;box-shadow:var(--sombra-lg)">
+<span style="font-size:15px;font-weight:700">Idea borrada</span>
+<button class="btn btn-g btn-sm" type="button" style="color:var(--crema)">Deshacer</button>
+</div>
+
+<div style="margin-top:16px;display:flex;align-items:center;gap:14px">
+<button class="btn btn-s btn-sm" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Descargar mis tarjetas</button>
+<span style="font-size:14px;font-weight:600;color:var(--suave)">Incluye tus ideas clave. No se guardan al cerrar la pestaña.</span>
+</div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":700,"height":1060}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
