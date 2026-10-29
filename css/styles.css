@@ -349,8 +349,34 @@ kbd {
 .aviso-breve .btn-g:hover { background: rgba(246, 248, 241, .18); }
 .aviso-breve .btn:focus-visible { outline-color: var(--crema); }
 
-/* ---------- Pantallas provisionales (Fase 3) ---------- */
-.provisional { padding: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; }
-.provisional h2 { font-size: 22px; font-weight: 900; }
-.provisional p { margin-top: 8px; font-size: 16px; font-weight: 600; color: var(--suave); }
-.provisional .btn { margin-top: 16px; }
+/* ---------- Fin de bloque ---------- */
+.fin-bloque { padding: 24px 32px 30px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.fin-bloque h1 { margin-top: 4px; font-size: 38px; font-weight: 900; line-height: 1.15; }
+.fin-bloque h1:focus { outline: none; }
+.fin-mensaje { margin-top: 6px; font-size: 19px; font-weight: 700; }
+.stats { margin-top: 16px; width: 100%; display: flex; gap: 12px; }
+.stat {
+  flex: 1; display: flex; align-items: baseline; justify-content: center; gap: 10px; padding: 12px 16px;
+  background: var(--arena); border: 2px solid var(--arena-borde); border-radius: 20px;
+}
+.stat b { font-size: 32px; font-weight: 900; line-height: 1; }
+.stat span { font-size: 15px; font-weight: 700; color: var(--suave); }
+.fin-botones { margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+/* ---------- Descanso ---------- */
+.descanso { display: flex; flex-direction: column; gap: 16px; }
+.punto.rosa { background: var(--rosa); }
+.tiempo.grande { font-size: 128px; }
+.insignia-campana {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px;
+  border: 2px dashed var(--borde-campo); border-radius: 999px;
+}
+.consejos { padding: 20px 24px 24px; }
+.consejos h2 { font-size: 19px; font-weight: 900; }
+.tips { margin-top: 12px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.tip {
+  display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 16px 12px;
+  background: var(--arena); border: 2px solid var(--arena-borde); border-radius: 22px;
+  text-align: center; font-size: 15px; font-weight: 700; line-height: 1.3;
+}
+.tip .ico { width: 48px; height: 48px; border-radius: 50%; background: var(--menta-media); display: flex; align-items: center; justify-content: center; color: var(--bosque); }

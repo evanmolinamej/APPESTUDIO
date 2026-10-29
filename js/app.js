@@ -5,10 +5,12 @@ var LIMITE_ESTUDIO = { min: 1, max: 180 };
 var LIMITE_DESCANSO = { min: 1, max: 60 };
 
 // Elementos de la página que se usan varias veces
-var cactusInicio, cactusMini, cactusReloj, cactusFin;
+var cactusInicio, cactusMini, cactusReloj, cactusFin, cactusDescanso;
 var botonEmpezar, resumen, tarjetasTecnica, tarjetaCustom;
 var campoEstudio, campoDescanso, mensajeError;
 var tiempoEl, barraProgreso, botonPausa, etiquetaFase, etiquetaBloque;
+var tiempoDescanso, barraDescanso, botonPausaDescanso, etiquetaDescanso, botonSaltar, botonSiguiente, avisoDescanso;
+var descansoTerminado = false;
 var empezando = false;
 
 // ============================================================
@@ -134,8 +136,7 @@ function empezar() {
   // El cactus se despierta; después de su fundido pasamos a la sesión.
   cambiarCactus(cactusInicio.firstChild, 'lentes');
   setTimeout(function () {
-    iniciarBloque();
-    mostrarVista('estudio', false);
+    empezarBloque(false);
     empezando = false;
   }, 450);
 }
@@ -144,6 +145,8 @@ function empezar() {
 function volverAlInicio() {
   temporizador.detener();
   state.pausado = false;
+  state.fase = 'estudio';
+  descansoTerminado = false;
   document.title = 'EffectiveStudy';
   cambiarCactus(cactusInicio.firstChild, 'dormido');
   cambiarCactus(cactusMini.firstChild, 'lentes');
@@ -165,10 +168,19 @@ function formatearTiempo(ms) {
   return { texto: dosDigitos(minutos) + ':' + dosDigitos(resto), minutos: minutos, segundos: resto };
 }
 
-// Empieza el bloque de estudio número state.bloque.
+// Muestra la sesión y empieza el bloque de estudio número state.bloque.
+function empezarBloque(enfocar) {
+  iniciarBloque();
+  mostrarVista('estudio', false);
+  actualizarCactusDelReloj(); // (si el repaso muestra el fin de ronda, el cactus sigue celebrando)
+  if (enfocar) botonPausa.focus();
+}
+
+// Prepara y arranca el cronómetro del bloque de estudio.
 function iniciarBloque() {
   state.fase = 'estudio';
   state.pausado = false;
+  descansoTerminado = false;
   etiquetaBloque.textContent = 'Bloque ' + state.bloque;
   cambiarCactus(cactusReloj.firstChild, 'lentes');
   cambiarCactus(cactusMini.firstChild, 'lentes');
@@ -176,23 +188,39 @@ function iniciarBloque() {
   temporizador.iniciar(state.tecnica.estudioMin * 60000, pintarReloj, terminarBloque);
 }
 
-// Pinta el tiempo, la barra de avance y el título de la pestaña. Se llama con cada tic del cronómetro.
-function pintarReloj(restanteMs) {
-  var t = formatearTiempo(restanteMs);
-  tiempoEl.textContent = t.texto;
-  // El lector de pantalla no lo anuncia cada segundo; esta etiqueta solo se lee si el usuario va al cronómetro.
-  tiempoEl.setAttribute('aria-label', plural(t.minutos, 'minuto', 'minutos') + ' ' + plural(t.segundos, 'segundo', 'segundos'));
-  barraProgreso.style.width = (100 * (1 - restanteMs / temporizador.duracionMs)) + '%';
-  document.title = t.texto + ' · ' + (state.pausado ? 'En pausa' : 'Estudiando');
+// Lo que dice la etiqueta de la fase actual y el título de la pestaña.
+function textoDeFase() {
+  if (state.pausado) return 'En pausa';
+  return state.fase === 'descanso' ? 'Descanso' : 'Estudiando';
 }
 
-// Textos que dependen de si está en pausa y el botón Pausar/Reanudar.
-function actualizarEtiquetas() {
-  etiquetaFase.textContent = state.pausado ? 'En pausa' : 'Estudiando';
-  var icono = state.pausado
+// Pinta el tiempo, la barra de avance y el título de la pestaña. Se llama con cada tic del cronómetro.
+function pintarTiempo(restanteMs, elTiempo, elBarra) {
+  var t = formatearTiempo(restanteMs);
+  elTiempo.textContent = t.texto;
+  // El lector de pantalla no lo anuncia cada segundo; esta etiqueta solo se lee si el usuario va al cronómetro.
+  elTiempo.setAttribute('aria-label', plural(t.minutos, 'minuto', 'minutos') + ' ' + plural(t.segundos, 'segundo', 'segundos'));
+  elBarra.style.width = (100 * (1 - restanteMs / temporizador.duracionMs)) + '%';
+  document.title = t.texto + ' · ' + textoDeFase();
+}
+
+function pintarReloj(restanteMs) { pintarTiempo(restanteMs, tiempoEl, barraProgreso); }
+function pintarDescanso(restanteMs) { pintarTiempo(restanteMs, tiempoDescanso, barraDescanso); }
+
+// Botón Pausar/Reanudar: el mismo dibujo y texto en la sesión y en el descanso.
+function contenidoBotonPausa() {
+  return state.pausado
     ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>Reanudar'
     : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>Pausar';
-  botonPausa.innerHTML = icono;
+}
+
+// Textos que dependen de si está en pausa (sesión y descanso).
+function actualizarEtiquetas() {
+  etiquetaFase.textContent = state.pausado ? 'En pausa' : 'Estudiando';
+  botonPausa.innerHTML = contenidoBotonPausa();
+  etiquetaDescanso.textContent = descansoTerminado ? 'Descanso terminado' : (state.pausado ? 'En pausa' : 'Descanso');
+  botonPausaDescanso.innerHTML = contenidoBotonPausa();
+  document.getElementById('insignia-campana').hidden = descansoTerminado; // ya sonó
 }
 
 function pausarOReanudar() {
@@ -204,7 +232,9 @@ function pausarOReanudar() {
     temporizador.pausar();
   }
   actualizarEtiquetas();
-  pintarReloj(temporizador.restanteMs); // refresca el título (Estudiando / En pausa)
+  // refresca el título (Estudiando / Descanso / En pausa)
+  if (state.fase === 'descanso') pintarDescanso(temporizador.restanteMs);
+  else pintarReloj(temporizador.restanteMs);
 }
 
 // Reiniciar: vuelve al tiempo completo del bloque. No borra tarjetas ni ideas.
@@ -218,8 +248,11 @@ function cambiarTiempo() {
   volverAlInicio();
 }
 
+// ============================================================
+// Fin de bloque
+// ============================================================
+
 // El estudio llegó a 00:00: suena la campana una vez y el cactus celebra.
-// (Pantalla provisional; el Fin de bloque completo se hace en la Fase 7.)
 function terminarBloque() {
   sonarCampana();
   var estudio = state.tecnica.estudioMin;
@@ -229,6 +262,59 @@ function terminarBloque() {
   document.title = 'EffectiveStudy · ¡Bloque terminado!';
   document.getElementById('mensaje-fin').textContent = 'Estudiaste ' + plural(estudio, 'minuto seguido', 'minutos seguidos') +
     '. Te ganaste ' + descanso + ' de descanso.';
+  document.getElementById('stat-tarjetas').textContent = state.tarjetas.length;
+  document.getElementById('stat-tarjetas-txt').textContent = state.tarjetas.length === 1 ? 'tarjeta creada' : 'tarjetas creadas';
+  document.getElementById('stat-ideas').textContent = state.ideas.length;
+  document.getElementById('stat-ideas-txt').textContent = state.ideas.length === 1 ? 'idea clave' : 'ideas clave';
+  document.getElementById('texto-descanso').textContent = 'Empezar descanso de ' + descanso + ' min';
+}
+
+// "Otro bloque": se salta el descanso y empieza el bloque siguiente.
+function otroBloque() {
+  state.bloque++;
+  empezarBloque(true);
+}
+
+// ============================================================
+// Descanso
+// ============================================================
+
+function iniciarDescanso() {
+  state.fase = 'descanso';
+  state.pausado = false;
+  descansoTerminado = false;
+  botonSaltar.hidden = false;
+  botonPausaDescanso.hidden = false;
+  botonSiguiente.hidden = true;
+  document.getElementById('descanso-aviso').textContent = '';
+  cambiarCactus(cactusDescanso.firstChild, 'relajado');
+  cambiarCactus(cactusMini.firstChild, 'relajado');
+  actualizarEtiquetas();
+  mostrarVista('descanso', false);
+  botonPausaDescanso.focus();
+  temporizador.iniciar(state.tecnica.descansoMin * 60000, pintarDescanso, terminarDescanso);
+}
+
+// El descanso llegó a 00:00: suena la campana una vez. El bloque siguiente NO arranca solo.
+function terminarDescanso() {
+  sonarCampana();
+  descansoTerminado = true;
+  state.pausado = false;
+  botonSaltar.hidden = true;
+  botonPausaDescanso.hidden = true;
+  botonSiguiente.hidden = false;
+  document.getElementById('texto-siguiente').textContent = 'Empezar bloque ' + (state.bloque + 1);
+  actualizarEtiquetas();
+  document.title = 'EffectiveStudy · Descanso terminado';
+  document.getElementById('descanso-aviso').textContent = 'Descanso terminado. Puedes empezar el bloque ' + (state.bloque + 1) + '.';
+  botonSiguiente.focus();
+}
+
+// "Saltar descanso" o "Empezar bloque N+1": detiene lo que corra y empieza el bloque siguiente.
+function siguienteBloque() {
+  temporizador.detener();
+  state.bloque++;
+  empezarBloque(true);
 }
 
 // ============================================================
@@ -276,7 +362,9 @@ function arrancar() {
   cactusReloj = document.getElementById('cactus-reloj');
   cactusReloj.appendChild(crearCactus('lentes', 124));
   cactusFin = document.getElementById('cactus-fin');
-  cactusFin.appendChild(crearCactus('celebra', 200));
+  cactusFin.appendChild(crearCactus('celebra', 240));
+  cactusDescanso = document.getElementById('cactus-descanso');
+  cactusDescanso.appendChild(crearCactus('relajado', 160));
 
   botonEmpezar = document.getElementById('boton-empezar');
   resumen = document.getElementById('resumen');
@@ -291,6 +379,12 @@ function arrancar() {
   botonPausa = document.getElementById('boton-pausa');
   etiquetaFase = document.getElementById('etiqueta-fase');
   etiquetaBloque = document.getElementById('etiqueta-bloque');
+  tiempoDescanso = document.getElementById('tiempo-descanso');
+  barraDescanso = document.getElementById('progreso-descanso');
+  botonPausaDescanso = document.getElementById('boton-pausa-descanso');
+  etiquetaDescanso = document.getElementById('etiqueta-descanso');
+  botonSaltar = document.getElementById('boton-saltar');
+  botonSiguiente = document.getElementById('boton-siguiente');
 
   tarjetasTecnica.forEach(function (t) {
     t.addEventListener('click', function () { seleccionarTarjeta(t); });
@@ -307,7 +401,12 @@ function arrancar() {
   botonPausa.addEventListener('click', pausarOReanudar);
   document.getElementById('boton-reiniciar').addEventListener('click', reiniciarBloque);
   document.getElementById('boton-cambiar').addEventListener('click', cambiarTiempo);
-  document.getElementById('boton-volver-fin').addEventListener('click', volverAlInicio);
+  document.getElementById('boton-descanso').addEventListener('click', iniciarDescanso);
+  document.getElementById('boton-otro-bloque').addEventListener('click', otroBloque);
+  botonPausaDescanso.addEventListener('click', pausarOReanudar);
+  botonSaltar.addEventListener('click', siguienteBloque);
+  botonSiguiente.addEventListener('click', siguienteBloque);
+  document.getElementById('boton-cambiar-descanso').addEventListener('click', cambiarTiempo);
 
   PESTANAS.forEach(function (p) {
     document.getElementById('tab-' + p).addEventListener('click', function () { seleccionarPestana(p, false); });
