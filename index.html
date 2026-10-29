@@ -3,85 +3,110 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EffectiveStudy · Fase 1 (página de prueba)</title>
+<title>EffectiveStudy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<main class="prueba">
+<div class="app">
 
-  <h1>EffectiveStudy · Fase 1: base</h1>
-  <p class="lbl">Página de prueba temporal. En la Fase 2 se reemplaza por el Inicio.</p>
-
-  <section class="zona" aria-label="Cactus">
-    <p class="sec">Mascota · 4 estados</p>
-    <div class="cactus-fila">
-      <div class="cactus-celda" data-cactus="dormido" data-tam="120"><h3>Dormido</h3><p>Inicio</p></div>
-      <div class="cactus-celda" data-cactus="lentes" data-tam="120"><h3>Con lentes</h3><p>Estudio</p></div>
-      <div class="cactus-celda" data-cactus="relajado" data-tam="120"><h3>Relajado</h3><p>Descanso</p></div>
-      <div class="cactus-celda" data-cactus="celebra" data-tam="120"><h3>Celebrando</h3><p>Fin de bloque</p></div>
+  <!-- Encabezado: aparece en todas las vistas -->
+  <header class="cabecera">
+    <div class="marca">
+      <span id="cactus-mini"></span>
+      <span class="marca-nombre">EffectiveStudy</span>
     </div>
-  </section>
+    <span class="lbl insignia punteada" id="insignia-cabecera">Sin cuentas · Nada se guarda</span>
+  </header>
 
-  <section class="zona" aria-label="Cambio de estado">
-    <p class="sec">Cambio con fundido de 250 ms</p>
-    <div style="display:flex;align-items:center;gap:20px">
-      <span id="cactus-prueba"></span>
-      <div class="botones-fila" role="group" aria-label="Elegir estado del cactus">
-        <button class="btn btn-s btn-sm" type="button" data-estado="dormido">Dormido</button>
-        <button class="btn btn-s btn-sm" type="button" data-estado="lentes">Lentes</button>
-        <button class="btn btn-s btn-sm" type="button" data-estado="relajado">Relajado</button>
-        <button class="btn btn-s btn-sm" type="button" data-estado="celebra">Celebra</button>
+  <main>
+
+    <!-- VISTA 1: Inicio -->
+    <section class="vista inicio" data-vista="inicio" aria-labelledby="titulo-inicio">
+      <span id="cactus-inicio"></span>
+      <h1 id="titulo-inicio" tabindex="-1">¿Cuánto vas a estudiar hoy?</h1>
+      <p class="subtitulo">Elige una técnica y empieza. El cactus se despierta contigo.</p>
+
+      <div class="tecnicas" role="group" aria-label="Técnicas populares">
+
+        <button class="tec on" type="button" aria-pressed="true" data-nombre="Pomodoro" data-estudio="25" data-descanso="5">
+          <div class="tec-top">
+            <h2>Pomodoro</h2>
+            <span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          </div>
+          <div class="tec-tiempos">
+            <div><div class="num">25<span> min</span></div><div class="lbl">de estudio</div></div>
+            <div><div class="num">5<span> min</span></div><div class="lbl">de descanso</div></div>
+          </div>
+          <div class="bar" aria-hidden="true"><span class="est" style="flex:25"></span><span class="des" style="flex:5"></span></div>
+          <span class="tec-nota">Para arrancar sin pereza</span>
+        </button>
+
+        <button class="tec" type="button" aria-pressed="false" data-nombre="Enfoque" data-estudio="50" data-descanso="10">
+          <div class="tec-top">
+            <h2>Enfoque</h2>
+            <span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          </div>
+          <div class="tec-tiempos">
+            <div><div class="num">50<span> min</span></div><div class="lbl">de estudio</div></div>
+            <div><div class="num">10<span> min</span></div><div class="lbl">de descanso</div></div>
+          </div>
+          <div class="bar" aria-hidden="true"><span class="est" style="flex:50"></span><span class="des" style="flex:10"></span></div>
+          <span class="tec-nota">Para lecturas y problemas largos</span>
+        </button>
+
+        <button class="tec" type="button" aria-pressed="false" data-nombre="Inmersión" data-estudio="90" data-descanso="20">
+          <div class="tec-top">
+            <h2>Inmersión</h2>
+            <span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          </div>
+          <div class="tec-tiempos">
+            <div><div class="num">90<span> min</span></div><div class="lbl">de estudio</div></div>
+            <div><div class="num">20<span> min</span></div><div class="lbl">de descanso</div></div>
+          </div>
+          <div class="bar" aria-hidden="true"><span class="est" style="flex:90"></span><span class="des" style="flex:20"></span></div>
+          <span class="tec-nota">Para preparar un examen</span>
+        </button>
+
+        <!-- Personalizado: no es un solo botón porque contiene campos; su título sí es un botón -->
+        <div class="tec custom" id="tec-custom" role="group" aria-labelledby="t-custom" data-nombre="Personalizado">
+          <div class="tec-top">
+            <h2 id="t-custom"><button class="tec-titulo" id="custom-boton" type="button" aria-pressed="false">Personalizado</button></h2>
+            <span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          </div>
+          <div class="tec-campos">
+            <label><span class="lbl">Estudio (min)</span><input class="campo" id="custom-estudio" type="number" inputmode="numeric" min="1" max="180" step="1" value="30" aria-describedby="custom-error"></label>
+            <label><span class="lbl">Descanso (min)</span><input class="campo" id="custom-descanso" type="number" inputmode="numeric" min="1" max="60" step="1" value="10" aria-describedby="custom-error"></label>
+          </div>
+          <p class="tec-error" id="custom-error" role="status" hidden></p>
+          <div class="bar" aria-hidden="true"><span class="est" id="custom-barra-est" style="flex:30"></span><span class="des" id="custom-barra-des" style="flex:10"></span></div>
+        </div>
+
       </div>
-    </div>
-    <p class="lbl" style="margin-top:12px">Cactus pequeño del encabezado (34 px, el mínimo permitido es 32): <span id="cactus-mini" style="vertical-align:middle"></span></p>
-  </section>
 
-  <section class="zona" aria-label="Botones">
-    <p class="sec">Botones · normal, hover, foco, deshabilitado</p>
-    <div class="botones-fila">
-      <button class="btn btn-p" type="button">Primario</button>
-      <button class="btn btn-p forzar-hover" type="button">Hover</button>
-      <button class="btn btn-p forzar-foco" type="button">Foco</button>
-      <button class="btn btn-p" type="button" disabled>Deshabilitado</button>
-    </div>
-    <div class="botones-fila">
-      <button class="btn btn-s" type="button">Secundario</button>
-      <button class="btn btn-s forzar-hover" type="button">Hover</button>
-      <button class="btn btn-s forzar-foco" type="button">Foco</button>
-      <button class="btn btn-s" type="button" disabled>Deshabilitado</button>
-    </div>
-    <div class="botones-fila">
-      <button class="btn btn-g btn-sm" type="button">Texto</button>
-      <button class="btn btn-g btn-sm" type="button" style="background:var(--menta-media)">Hover</button>
-      <button class="btn btn-g btn-sm forzar-foco" type="button">Foco</button>
-      <button class="btn btn-g btn-sm" type="button" disabled>Deshabilitado</button>
-    </div>
-    <div class="botones-fila">
-      <button class="btn btn-p btn-lg" type="button">Grande 64</button>
-      <button class="btn btn-p" type="button">Normal 52</button>
-      <button class="btn btn-p btn-sm" type="button">Pequeño 44</button>
-    </div>
-  </section>
+      <button class="btn btn-p btn-lg" id="boton-empezar" type="button">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>Empezar
+      </button>
+      <p class="resumen" id="resumen">Pomodoro 25/5 · 25 min de estudio y 5 de descanso</p>
+      <p class="aviso">Tus tarjetas viven solo en esta pestaña. Puedes descargarlas cuando quieras.</p>
+    </section>
 
-  <section class="zona" aria-label="Tipografía">
-    <p class="sec">Tipografía</p>
-    <div class="mono cronometro-prueba">14:52</div>
-    <div class="tipo-fila"><span class="lbl">JetBrains Mono 800 · solo cronómetro</span></div>
-    <div class="tipo-fila"><p style="font-size:32px;font-weight:900;line-height:1.15">¿Cuánto vas a estudiar hoy?</p><span class="lbl">Nunito 900 · título de pantalla</span></div>
-    <div class="tipo-fila"><p style="font-size:17px;font-weight:600;line-height:1.4">Anota una pregunta y su respuesta mientras estudias. Aparecerán aquí para repasarlas.</p><span class="lbl">Nunito 600 · cuerpo</span></div>
-  </section>
+    <!-- VISTA PROVISIONAL (Fase 2): se reemplaza por la sesión real en la Fase 3 -->
+    <section class="vista" data-vista="estudio" aria-labelledby="titulo-estudio" hidden>
+      <div class="zona provisional">
+        <h2 id="titulo-estudio" tabindex="-1">Aquí irá la sesión de estudio (Fase 3)</h2>
+        <p id="datos-sesion"></p>
+        <button class="btn btn-s" id="boton-volver" type="button">Volver al inicio</button>
+      </div>
+    </section>
 
-  <section class="zona" aria-label="Paleta">
-    <p class="sec">Colores</p>
-    <div id="paleta" style="display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:10px"></div>
-  </section>
-
-</main>
+  </main>
+</div>
 
 <!-- Scripts clásicos (sin módulos) para que abra con doble clic. El orden importa. -->
+<script src="js/state.js"></script>
 <script src="js/cactus.js"></script>
 <script src="js/app.js"></script>
 </body>
