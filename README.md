@@ -29,6 +29,17 @@ Usa **Personalizado con 1 minuto de estudio y 1 de descanso** para ver el ciclo 
 
 Lista de pruebas de terminado: `docs/03-tecnica.md`, sección "Pruebas".
 
+## Publicar en Vercel
+No necesita build ni configuración especial: es un sitio estático (`index.html` en la raíz).
+1. Entra a [vercel.com](https://vercel.com) con tu cuenta de GitHub → **Add New… → Project** → importa `APPESTUDIO`.
+2. **Framework Preset: Other.** Deja vacíos *Build Command*, *Output Directory* e *Install Command*.
+3. En **Settings → Git → Production Branch**, pon `main` (la rama que recibe los cambios ya revisados).
+4. **Deploy.** Cada cambio en `main` actualiza la web; cada otra rama genera un enlace de vista previa.
+
+`vercel.json` ya incluye:
+- **Redirecciones:** `diseno/`, `docs/` y `BRIEF.md` no se publican (el brief dice que el diseño es solo referencia).
+- **Cabeceras de seguridad:** la política CSP solo permite lo que la app usa (sus propios archivos y las fuentes de Google), prohíbe cualquier otra conexión y bloquea cámara, micrófono y ubicación.
+
 ## Reglas del proyecto
 - Solo HTML, CSS y JavaScript puro. Sin frameworks, sin npm, sin build.
 - Prohibido guardar: nada de `localStorage`, `sessionStorage`, `IndexedDB` ni cookies.
