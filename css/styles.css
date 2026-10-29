@@ -84,8 +84,8 @@ button, input, textarea, select { font: inherit; color: inherit; }
 
 /* ---------- Campos ---------- */
 .campo {
-  border: 2px solid var(--borde-campo); border-radius: 16px;
-  background: var(--campo); font-weight: 800;
+  width: 100%; border: 2px solid var(--borde-campo); border-radius: 16px;
+  background: var(--campo); padding: 12px 14px; font-size: 16px; font-weight: 600; resize: none;
 }
 .campo:focus-visible { outline: 3px solid var(--bosque); outline-offset: 3px; }
 .campo::placeholder { color: var(--suave); opacity: 1; }
@@ -128,7 +128,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .tec-nota { font-size: 14px; font-weight: 600; color: var(--suave); }
 .tec-campos { display: flex; gap: 14px; }
 .tec-campos label { display: flex; flex-direction: column; gap: 4px; }
-.tec-campos .campo { width: 112px; height: 52px; font-size: 22px; text-align: center; }
+.tec-campos .campo { width: 112px; height: 52px; padding: 0; font-size: 22px; font-weight: 800; text-align: center; }
 .tec-error { display: flex; align-items: flex-start; gap: 6px; font-size: 14px; font-weight: 700; line-height: 1.3; }
 .tec-error[hidden] { display: none; }
 .tec-error svg { flex: none; margin-top: 1px; }
@@ -153,7 +153,132 @@ body.en-sesion main { flex: 1; min-height: 0; display: flex; flex-direction: col
 .progreso div { width: 0; height: 100%; border-radius: 6px; background: var(--cactus); }
 .reloj-botones { margin-top: 16px; display: flex; align-items: center; gap: 12px; }
 .reloj-botones .espacio { flex: 1; }
-.panel { flex: 1; min-height: 0; overflow-y: auto; padding: 16px 20px 20px; }
+.panel { flex: 1; min-height: 0; padding: 16px 20px 20px; }
+
+/* ---------- Panel: pestañas, chips, campos ---------- */
+.tabs { display: flex; gap: 4px; padding: 5px; background: var(--menta); border-radius: 999px; flex: none; }
+.tab {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+  height: 46px; border: 0; border-radius: 999px; background: transparent;
+  font-size: 16px; font-weight: 800; color: var(--bosque); cursor: pointer;
+  transition: background-color 150ms, color 150ms;
+}
+.tab:hover:not(.on) { background: var(--menta-media); }
+.tab.on { background: var(--bosque); color: var(--crema); }
+.tab:focus-visible { outline: 3px solid var(--bosque); outline-offset: 3px; }
+.badge {
+  min-width: 24px; height: 24px; padding: 0 7px; border-radius: 12px;
+  background: var(--menta-media); color: var(--bosque);
+  font-size: 13px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center;
+}
+.tab.on .badge, .chip.on .badge { background: var(--crema); color: var(--bosque); }
+
+.panel { display: flex; flex-direction: column; overflow: hidden; }
+/* El cuerpo es lo único que hace scroll; el margen negativo deja ver los aros de foco sin recortarlos */
+.panel-cuerpo { flex: 1; min-height: 0; overflow-y: auto; margin: 10px -8px 0; padding: 4px 8px 8px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips[hidden] { display: none; }
+.chip {
+  display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px;
+  border-radius: 999px; border: 2px solid var(--arena-borde); background: var(--arena);
+  font-size: 15px; font-weight: 800; color: var(--bosque); cursor: pointer;
+  transition: background-color 150ms, color 150ms;
+}
+.chip:hover:not(.on) { background: var(--arena-borde); }
+.chip.on { background: var(--bosque); border-color: var(--bosque); color: var(--crema); }
+.chip.nuevo { background: transparent; border: 2px dashed var(--borde-campo); }
+.chip.nuevo:hover { background: var(--menta-media); }
+.chip:focus-visible { outline: 3px solid var(--bosque); outline-offset: 3px; }
+
+.msg-error { margin-top: 6px; font-size: 14px; font-weight: 700; }
+.msg-error[hidden] { display: none; }
+
+.form-materia { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.form-materia[hidden] { display: none; }
+.fila-materia { display: flex; gap: 10px; align-items: center; }
+.fila-materia .campo { height: 52px; }
+.fila-materia .btn-p { height: 52px; flex: none; }
+.slot-materia:empty { display: none; }
+
+kbd {
+  font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; font-weight: 700;
+  padding: 1px 6px; border: 2px solid var(--arena-borde); border-radius: 6px;
+  background: var(--crema); color: var(--bosque);
+}
+.icon-btn {
+  width: 44px; height: 44px; border: 0; background: transparent; color: var(--bosque);
+  border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: background-color 150ms;
+}
+.icon-btn:hover { background: var(--menta-media); }
+.icon-btn:focus-visible { outline: 3px solid var(--bosque); outline-offset: 3px; }
+
+/* ---------- Flashcards ---------- */
+.card { background: var(--arena); border: 2px solid var(--arena-borde); border-radius: 24px; box-shadow: var(--sombra-sm); }
+.nueva-tarjeta { margin-top: 12px; padding: 14px 16px 16px; }
+.nueva-tarjeta[hidden], .elegir-materia[hidden] { display: none; }
+.nueva-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.nueva-top h3 { font-size: 17px; font-weight: 900; }
+.nueva-campos { margin-top: 10px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.nueva-campos label { display: flex; flex-direction: column; gap: 4px; }
+.nueva-campos .campo { height: 72px; }
+.nueva-pie { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.elegir-materia { margin-top: 12px; padding: 14px 16px; font-size: 16px; font-weight: 700; }
+
+.lista-tarjetas { margin-top: 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.lista-tarjetas:empty { display: none; }
+.fc-wrap { position: relative; perspective: 900px; }
+.fc-wrap .icon-btn { position: absolute; top: 2px; right: 2px; z-index: 2; }
+.fc {
+  display: grid; width: 100%; padding: 0; border: 0; background: transparent;
+  text-align: left; color: var(--bosque); cursor: pointer;
+  transform-style: preserve-3d; transition: transform 350ms ease-in-out;
+}
+.fc.volteada { transform: rotateY(180deg); }
+.fc:focus-visible { outline: 3px solid var(--bosque); outline-offset: 3px; border-radius: 24px; }
+/* Las dos caras ocupan el mismo lugar; la tarjeta mide lo que mida la más alta */
+.fc-cara {
+  grid-area: 1 / 1; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  min-height: 128px; padding: 14px 16px;
+  background: var(--arena); border: 2px solid var(--arena-borde); border-radius: 24px; box-shadow: var(--sombra-sm);
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.fc-cara.reverso { transform: rotateY(180deg); background: var(--menta); border-color: var(--bosque); }
+.fc .q { font-size: 17px; font-weight: 800; line-height: 1.3; overflow-wrap: anywhere; }
+.fc .hint { margin-top: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--suave); }
+.fc:hover .fc-cara { box-shadow: var(--sombra-md); }
+.pill { padding: 3px 10px; border-radius: 999px; background: var(--crema); font-size: 13px; font-weight: 800; }
+.pill.dark { background: var(--bosque); color: var(--crema); }
+
+/* Con "movimiento reducido": sin giro, la tarjeta cambia con un fundido corto */
+@media (prefers-reduced-motion: reduce) {
+  .fc, .fc.volteada { transform: none; transition: none; }
+  .fc-cara { backface-visibility: visible; -webkit-backface-visibility: visible; transition: opacity 150ms; }
+  .fc-cara.reverso { transform: none; opacity: 0; }
+  .fc.volteada .reverso { opacity: 1; }
+  .fc.volteada .frente { opacity: 0; }
+}
+
+.vacio-grande {
+  margin-top: 14px; padding: 22px 20px; border: 2px dashed var(--arena-borde); border-radius: 24px;
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px;
+}
+.vacio-grande[hidden] { display: none; }
+.vacio-grande h3 { font-size: 20px; font-weight: 900; }
+.vacio-grande p { max-width: 380px; font-size: 16px; font-weight: 600; color: var(--suave); }
+
+/* ---------- Aviso breve con "Deshacer" ---------- */
+.aviso-breve {
+  position: sticky; bottom: 0; margin-top: 12px;
+  display: flex; align-items: center; justify-content: space-between; min-height: 52px;
+  padding: 4px 8px 4px 18px; background: var(--bosque); color: var(--crema);
+  border-radius: 18px; box-shadow: var(--sombra-lg); font-size: 15px; font-weight: 700;
+}
+.aviso-breve[hidden] { display: none; }
+.aviso-breve .btn-g { color: var(--crema); }
+.aviso-breve .btn-g:hover { background: rgba(246, 248, 241, .18); }
+.aviso-breve .btn:focus-visible { outline-color: var(--crema); }
 
 /* ---------- Pantallas provisionales (Fase 3) ---------- */
 .provisional { padding: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; }

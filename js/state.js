@@ -10,5 +10,7 @@ var state = {
   pausado: false,
   materias: [],           // { id, nombre }
   tarjetas: [],           // { id, materiaId, pregunta, respuesta }
-  ideas: []               // { id, materiaId, texto }
+  ideas: [],              // { id, materiaId, texto }
+  materiaActiva: null,    // materia elegida en los chips (null = "Todas"); la comparten Flashcards e Ideas
+  pestana: 'flashcards'   // flashcards | ideas | repaso
 };

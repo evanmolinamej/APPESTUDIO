@@ -232,6 +232,39 @@ function terminarBloque() {
 }
 
 // ============================================================
+// Pestañas del panel (Flashcards · Ideas clave · Repaso)
+// ============================================================
+var PESTANAS = ['flashcards', 'ideas', 'repaso'];
+
+// Cambia de pestaña: marca la pestaña, muestra su panel y oculta los otros.
+function seleccionarPestana(nombre, enfocar) {
+  state.pestana = nombre;
+  PESTANAS.forEach(function (p) {
+    var tab = document.getElementById('tab-' + p);
+    var activa = p === nombre;
+    tab.classList.toggle('on', activa);
+    tab.setAttribute('aria-selected', String(activa));
+    tab.tabIndex = activa ? 0 : -1; // solo la pestaña activa entra con Tab; las demás, con flechas
+    document.getElementById('panel-' + p).hidden = !activa;
+  });
+  if (enfocar) document.getElementById('tab-' + nombre).focus();
+  renderPanel(); // el formulario de materia se coloca bajo los chips de la pestaña activa
+}
+
+// Flechas ← → y Inicio/Fin mueven entre pestañas.
+function teclaEnPestanas(evento) {
+  var posicion = PESTANAS.indexOf(state.pestana);
+  var nueva = null;
+  if (evento.key === 'ArrowRight') nueva = (posicion + 1) % PESTANAS.length;
+  else if (evento.key === 'ArrowLeft') nueva = (posicion + PESTANAS.length - 1) % PESTANAS.length;
+  else if (evento.key === 'Home') nueva = 0;
+  else if (evento.key === 'End') nueva = PESTANAS.length - 1;
+  if (nueva === null) return;
+  evento.preventDefault();
+  seleccionarPestana(PESTANAS[nueva], true);
+}
+
+// ============================================================
 // Arranque
 // ============================================================
 function arrancar() {
@@ -274,6 +307,12 @@ function arrancar() {
   document.getElementById('boton-reiniciar').addEventListener('click', reiniciarBloque);
   document.getElementById('boton-cambiar').addEventListener('click', cambiarTiempo);
   document.getElementById('boton-volver-fin').addEventListener('click', volverAlInicio);
+
+  PESTANAS.forEach(function (p) {
+    document.getElementById('tab-' + p).addEventListener('click', function () { seleccionarPestana(p, false); });
+  });
+  document.querySelector('[role="tablist"]').addEventListener('keydown', teclaEnPestanas);
+  iniciarCards();
 
   actualizarEtiquetas();
   refrescarInicio();
