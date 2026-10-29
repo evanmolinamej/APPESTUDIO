@@ -198,7 +198,50 @@
 
           <!-- PESTAÑA: Repaso (Fase 6) -->
           <div role="tabpanel" id="panel-repaso" aria-labelledby="tab-repaso" hidden>
-            <p class="lbl">El repaso llega en la Fase 6.</p>
+            <!-- Sin tarjetas -->
+            <div class="vacio-grande compacto" id="repaso-vacio" hidden>
+              <svg width="96" height="84" viewBox="0 0 96 84" fill="none" aria-hidden="true"><rect x="12" y="14" width="52" height="40" rx="10" transform="rotate(-8 38 34)" fill="#E6D6A8" stroke="#1E5B3C" stroke-width="4"/><rect x="26" y="22" width="52" height="40" rx="10" fill="#F7EFD8" stroke="#1E5B3C" stroke-width="4"/><path d="M38 42H66" stroke="#1E5B3C" stroke-width="4" stroke-linecap="round"/><circle cx="78" cy="22" r="9" fill="#F28FA8" stroke="#1E5B3C" stroke-width="3.5"/></svg>
+              <h3>Nada que repasar aún</h3>
+              <p>Crea al menos una tarjeta y vuelve aquí. Las que no sepas volverán a aparecer.</p>
+              <button class="btn btn-p btn-sm" id="repaso-ir-flash" type="button">Ir a Flashcards</button>
+            </div>
+
+            <div id="repaso-cuerpo" hidden>
+              <div class="repaso-top">
+                <div class="repaso-titulo">
+                  <h3 id="repaso-ronda">Ronda 1</h3>
+                  <label class="solo-lectores" for="repaso-materia">Materia a repasar</label>
+                  <select class="campo" id="repaso-materia"></select>
+                </div>
+                <span class="repaso-pos" id="repaso-pos"></span>
+              </div>
+
+              <!-- La tarjeta en juego -->
+              <div id="repaso-juego">
+                <div class="segs" id="repaso-segs" role="img"></div>
+                <p class="lbl repaso-cuenta" id="repaso-cuenta"></p>
+                <div class="repaso-carta">
+                  <div class="repaso-carta-top">
+                    <span class="pill" id="repaso-pill-materia"></span>
+                    <span class="pill dark" id="repaso-pill-respuesta" hidden>Respuesta</span>
+                  </div>
+                  <p class="repaso-pregunta" id="repaso-pregunta"></p>
+                  <div class="repaso-respuesta" id="repaso-respuesta" tabindex="-1" hidden></div>
+                </div>
+                <div class="rate-fila" id="repaso-acciones"></div>
+                <p class="lbl repaso-ayuda" id="repaso-ayuda">«No la sé» vuelve en 3 tarjetas. «Dudo» vuelve al final de la ronda. «La sé» sale de la ronda.</p>
+              </div>
+
+              <!-- Fin de la ronda -->
+              <div class="card fin-ronda" id="repaso-fin" hidden>
+                <h3 id="repaso-fin-titulo" tabindex="-1">¡Ronda completa!</h3>
+                <p id="repaso-fin-texto" aria-live="polite"></p>
+                <div class="fin-ronda-botones">
+                  <button class="btn btn-p btn-sm" id="repaso-otra" type="button">Repasar otra ronda</button>
+                  <button class="btn btn-s btn-sm" id="repaso-volver" type="button">Volver a Flashcards</button>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Aviso breve con "Deshacer" (compartido por tarjetas e ideas) -->
@@ -229,6 +272,7 @@
 <script src="js/sound.js"></script>
 <script src="js/cactus.js"></script>
 <script src="js/cards.js"></script>
+<script src="js/review.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

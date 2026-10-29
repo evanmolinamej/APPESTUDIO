@@ -12,5 +12,6 @@ var state = {
   tarjetas: [],           // { id, materiaId, pregunta, respuesta }
   ideas: [],              // { id, materiaId, texto }
   materiaActiva: null,    // materia elegida en los chips (null = "Todas"); la comparten Flashcards e Ideas
-  pestana: 'flashcards'   // flashcards | ideas | repaso
+  pestana: 'flashcards', // flashcards | ideas | repaso
+  repaso: null            // la ronda de repaso en curso (la crea js/review.js al abrir la pestaña Repaso)
 };

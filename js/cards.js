@@ -344,6 +344,7 @@ function renderPanel() {
   renderNuevaTarjeta();
   renderListaTarjetas();
   renderIdeas();
+  renderRepaso();
   document.getElementById('badge-tarjetas').textContent = state.tarjetas.length;
   document.getElementById('badge-ideas').textContent = state.ideas.length;
 }

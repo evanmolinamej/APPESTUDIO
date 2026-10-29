@@ -247,6 +247,7 @@ function seleccionarPestana(nombre, enfocar) {
     tab.tabIndex = activa ? 0 : -1; // solo la pestaña activa entra con Tab; las demás, con flechas
     document.getElementById('panel-' + p).hidden = !activa;
   });
+  if (nombre === 'repaso') entrarARepaso();
   if (enfocar) document.getElementById('tab-' + nombre).focus();
   renderPanel(); // el formulario de materia se coloca bajo los chips de la pestaña activa
 }
@@ -313,6 +314,7 @@ function arrancar() {
   });
   document.querySelector('[role="tablist"]').addEventListener('keydown', teclaEnPestanas);
   iniciarCards();
+  iniciarRepaso();
 
   actualizarEtiquetas();
   refrescarInicio();
