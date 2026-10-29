@@ -3,86 +3,360 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EffectiveStudy · Fase 1 (página de prueba)</title>
+<title>EffectiveStudy</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 228%22 fill=%22none%22%3E%3Cg fill=%22none%22 stroke=%22%231E5B3C%22 stroke-width=%2232%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M70 130H38V104%22/%3E%3Cpath d=%22M130 116H162V86%22/%3E%3C/g%3E%3Crect x=%2262%22 y=%2240%22 width=%2276%22 height=%22138%22 rx=%2238%22 fill=%22%231E5B3C%22 stroke=%22%231E5B3C%22 stroke-width=%2212%22/%3E%3Cg fill=%22none%22 stroke=%22%234FAE74%22 stroke-width=%2220%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M70 130H38V104%22/%3E%3Cpath d=%22M130 116H162V86%22/%3E%3C/g%3E%3Crect x=%2262%22 y=%2240%22 width=%2276%22 height=%22138%22 rx=%2238%22 fill=%22%234FAE74%22/%3E%3Cpath d=%22M82 138V158M118 138V158%22 stroke=%22%233A9560%22 stroke-width=%224%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2283%22 cy=%2294%22 r=%2215%22 fill=%22%23F6F8F1%22 stroke=%22%231E5B3C%22 stroke-width=%224.5%22/%3E%3Ccircle cx=%22117%22 cy=%2294%22 r=%2215%22 fill=%22%23F6F8F1%22 stroke=%22%231E5B3C%22 stroke-width=%224.5%22/%3E%3Cpath d=%22M98 92Q100 89 102 92%22 stroke=%22%231E5B3C%22 stroke-width=%224.5%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2285%22 cy=%2296%22 r=%224.5%22 fill=%22%231E5B3C%22/%3E%3Ccircle cx=%22115%22 cy=%2296%22 r=%224.5%22 fill=%22%231E5B3C%22/%3E%3Cpath d=%22M92 122Q100 128 108 122%22 stroke=%22%231E5B3C%22 stroke-width=%224.5%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2271%22 cy=%22118%22 r=%225%22 fill=%22%23F28FA8%22/%3E%3Ccircle cx=%22129%22 cy=%22118%22 r=%225%22 fill=%22%23F28FA8%22/%3E%3Cpath d=%22M58 184H142L134 214Q133 220 126 220H74Q67 220 66 214Z%22 fill=%22%23E6D6A8%22 stroke=%22%231E5B3C%22 stroke-width=%225%22 stroke-linejoin=%22round%22/%3E%3Crect x=%2248%22 y=%22160%22 width=%22104%22 height=%2228%22 rx=%2214%22 fill=%22%23F7EFD8%22 stroke=%22%231E5B3C%22 stroke-width=%225%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<main class="prueba">
+<div class="app">
 
-  <h1>EffectiveStudy · Fase 1: base</h1>
-  <p class="lbl">Página de prueba temporal. En la Fase 2 se reemplaza por el Inicio.</p>
-
-  <section class="zona" aria-label="Cactus">
-    <p class="sec">Mascota · 4 estados</p>
-    <div class="cactus-fila">
-      <div class="cactus-celda" data-cactus="dormido" data-tam="120"><h3>Dormido</h3><p>Inicio</p></div>
-      <div class="cactus-celda" data-cactus="lentes" data-tam="120"><h3>Con lentes</h3><p>Estudio</p></div>
-      <div class="cactus-celda" data-cactus="relajado" data-tam="120"><h3>Relajado</h3><p>Descanso</p></div>
-      <div class="cactus-celda" data-cactus="celebra" data-tam="120"><h3>Celebrando</h3><p>Fin de bloque</p></div>
+  <!-- Encabezado: aparece en todas las vistas -->
+  <header class="cabecera">
+    <div class="marca">
+      <span id="cactus-mini"></span>
+      <span class="marca-nombre">EffectiveStudy</span>
     </div>
-  </section>
+    <span class="lbl insignia punteada" id="insignia-cabecera">Sin cuentas · Nada se guarda</span>
+  </header>
 
-  <section class="zona" aria-label="Cambio de estado">
-    <p class="sec">Cambio con fundido de 250 ms</p>
-    <div style="display:flex;align-items:center;gap:20px">
-      <span id="cactus-prueba"></span>
-      <div class="botones-fila" role="group" aria-label="Elegir estado del cactus">
-        <button class="btn btn-s btn-sm" type="button" data-estado="dormido">Dormido</button>
-        <button class="btn btn-s btn-sm" type="button" data-estado="lentes">Lentes</button>
-        <button class="btn btn-s btn-sm" type="button" data-estado="relajado">Relajado</button>
-        <button class="btn btn-s btn-sm" type="button" data-estado="celebra">Celebra</button>
+  <main>
+
+    <!-- VISTA 1: Inicio -->
+    <section class="vista inicio" data-vista="inicio" aria-labelledby="titulo-inicio">
+      <span id="cactus-inicio"></span>
+      <h1 id="titulo-inicio" tabindex="-1">¿Cuánto vas a estudiar hoy?</h1>
+      <p class="subtitulo">Elige una técnica y empieza. El cactus se despierta contigo.</p>
+
+      <div class="tecnicas" role="group" aria-label="Técnicas populares">
+
+        <button class="tec on" type="button" aria-pressed="true" data-nombre="Pomodoro" data-estudio="25" data-descanso="5">
+          <div class="tec-top">
+            <h2>Pomodoro</h2>
+            <span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          </div>
+          <div class="tec-tiempos">
+            <div><div class="num">25<span> min</span></div><div class="lbl">de estudio</div></div>
+            <div><div class="num">5<span> min</span></div><div class="lbl">de descanso</div></div>
+          </div>
+          <div class="bar" aria-hidden="true"><span class="est" style="flex:25"></span><span class="des" style="flex:5"></span></div>
+          <span class="tec-nota">Para arrancar sin pereza</span>
+        </button>
+
+        <button class="tec" type="button" aria-pressed="false" data-nombre="Enfoque" data-estudio="50" data-descanso="10">
+          <div class="tec-top">
+            <h2>Enfoque</h2>
+            <span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          </div>
+          <div class="tec-tiempos">
+            <div><div class="num">50<span> min</span></div><div class="lbl">de estudio</div></div>
+            <div><div class="num">10<span> min</span></div><div class="lbl">de descanso</div></div>
+          </div>
+          <div class="bar" aria-hidden="true"><span class="est" style="flex:50"></span><span class="des" style="flex:10"></span></div>
+          <span class="tec-nota">Para lecturas y problemas largos</span>
+        </button>
+
+        <button class="tec" type="button" aria-pressed="false" data-nombre="Inmersión" data-estudio="90" data-descanso="20">
+          <div class="tec-top">
+            <h2>Inmersión</h2>
+            <span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          </div>
+          <div class="tec-tiempos">
+            <div><div class="num">90<span> min</span></div><div class="lbl">de estudio</div></div>
+            <div><div class="num">20<span> min</span></div><div class="lbl">de descanso</div></div>
+          </div>
+          <div class="bar" aria-hidden="true"><span class="est" style="flex:90"></span><span class="des" style="flex:20"></span></div>
+          <span class="tec-nota">Para preparar un examen</span>
+        </button>
+
+        <!-- Personalizado: no es un solo botón porque contiene campos; su título sí es un botón -->
+        <div class="tec custom" id="tec-custom" role="group" aria-labelledby="t-custom" data-nombre="Personalizado">
+          <div class="tec-top">
+            <h2 id="t-custom"><button class="tec-titulo" id="custom-boton" type="button" aria-pressed="false">Personalizado</button></h2>
+            <span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          </div>
+          <div class="tec-campos">
+            <label><span class="lbl">Estudio (min)</span><input class="campo" id="custom-estudio" type="number" inputmode="numeric" min="1" max="180" step="1" value="30" aria-describedby="custom-error"></label>
+            <label><span class="lbl">Descanso (min)</span><input class="campo" id="custom-descanso" type="number" inputmode="numeric" min="1" max="60" step="1" value="10" aria-describedby="custom-error"></label>
+          </div>
+          <p class="tec-error" id="custom-error" role="status" hidden></p>
+          <div class="bar" aria-hidden="true"><span class="est" id="custom-barra-est" style="flex:30"></span><span class="des" id="custom-barra-des" style="flex:10"></span></div>
+        </div>
+
+      </div>
+
+      <button class="btn btn-p btn-lg" id="boton-empezar" type="button">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>Empezar
+      </button>
+      <p class="resumen" id="resumen">Pomodoro 25/5 · 25 min de estudio y 5 de descanso</p>
+      <p class="aviso">Tus tarjetas viven solo en esta pestaña. Puedes descargarlas cuando quieras.</p>
+    </section>
+
+    <!-- VISTA 2: Sesión de estudio. El cronómetro queda fijo arriba; solo el panel de abajo hace scroll. -->
+    <section class="vista sesion" data-vista="estudio" aria-labelledby="titulo-sesion" hidden>
+      <h1 class="solo-lectores" id="titulo-sesion">Sesión de estudio</h1>
+      <section class="zona reloj" aria-labelledby="titulo-reloj">
+        <h2 class="solo-lectores" id="titulo-reloj">Cronómetro</h2>
+        <div class="reloj-top">
+          <span class="estado"><span class="punto"></span><span id="etiqueta-fase">Estudiando</span></span>
+          <span class="lbl" id="etiqueta-bloque">Bloque 1</span>
+        </div>
+        <div class="reloj-medio">
+          <span id="cactus-reloj"></span>
+          <div class="mono tiempo" id="tiempo" role="timer" aria-label="25 minutos 0 segundos">25:00</div>
+        </div>
+        <div class="progreso" aria-hidden="true"><div id="progreso-barra"></div></div>
+        <div class="reloj-botones">
+          <button class="btn btn-p" id="boton-pausa" type="button"></button>
+          <button class="btn btn-s" id="boton-reiniciar" type="button">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4.5h4.5"/></svg>Reiniciar
+          </button>
+          <span class="espacio"></span>
+          <button class="btn btn-g btn-sm" id="boton-cambiar" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Cambiar tiempo
+          </button>
+        </div>
+      </section>
+
+      <section class="zona panel" aria-labelledby="titulo-panel">
+        <h2 class="solo-lectores" id="titulo-panel">Panel de estudio</h2>
+        <div class="tabs" role="tablist" aria-label="Pestañas del panel">
+          <button class="tab on" id="tab-flashcards" type="button" role="tab" aria-selected="true" aria-controls="panel-flashcards" data-pestana="flashcards">Flashcards <span class="badge" id="badge-tarjetas">0</span></button>
+          <button class="tab" id="tab-ideas" type="button" role="tab" aria-selected="false" aria-controls="panel-ideas" data-pestana="ideas" tabindex="-1">Ideas clave <span class="badge" id="badge-ideas">0</span></button>
+          <button class="tab" id="tab-repaso" type="button" role="tab" aria-selected="false" aria-controls="panel-repaso" data-pestana="repaso" tabindex="-1">Repaso</button>
+        </div>
+
+        <div class="panel-cuerpo">
+
+          <!-- Formulario de materia: es uno solo y se coloca bajo los chips de la pestaña activa -->
+          <form class="form-materia" id="form-materia" novalidate hidden>
+            <label class="lbl" for="materia-nombre" id="materia-etiqueta">Nueva materia</label>
+            <div class="fila-materia">
+              <input class="campo" id="materia-nombre" type="text" maxlength="40" autocomplete="off" placeholder="Nombre de la materia, ej. Microeconomía" aria-describedby="materia-msg">
+              <button class="btn btn-p btn-sm" type="submit"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Crear materia</button>
+              <button class="btn btn-g btn-sm" id="materia-cancelar" type="button">Cancelar</button>
+            </div>
+            <p class="msg-error" id="materia-msg" role="alert" hidden></p>
+          </form>
+
+          <!-- PESTAÑA: Flashcards -->
+          <div role="tabpanel" id="panel-flashcards" aria-labelledby="tab-flashcards">
+            <div class="chips js-chips" data-tipo="tarjetas" role="group" aria-label="Filtrar por materia"></div>
+            <div class="slot-materia"></div>
+
+            <div class="card nueva-tarjeta" id="nueva-tarjeta" hidden>
+              <div class="nueva-top">
+                <h3>Nueva tarjeta</h3>
+                <span class="lbl" id="tarjeta-materia">en materia</span>
+              </div>
+              <div class="nueva-campos">
+                <label><span class="lbl">Pregunta</span><textarea class="campo" id="tarjeta-pregunta" rows="2" placeholder="¿Qué quieres recordar?"></textarea></label>
+                <label><span class="lbl">Respuesta</span><textarea class="campo" id="tarjeta-respuesta" rows="2" placeholder="Escríbela con tus palabras"></textarea></label>
+              </div>
+              <p class="msg-error" id="tarjeta-msg" role="alert" hidden></p>
+              <div class="nueva-pie">
+                <span class="lbl"><kbd>Ctrl</kbd> + <kbd>Enter</kbd> para guardar</span>
+                <button class="btn btn-p btn-sm" id="tarjeta-guardar" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Añadir tarjeta</button>
+              </div>
+            </div>
+            <p class="card elegir-materia" id="elegir-materia" hidden>Elige una materia arriba para añadir tarjetas.</p>
+
+            <div class="lista-tarjetas" id="lista-tarjetas"></div>
+
+            <div class="vacio-grande" id="vacio-tarjetas">
+              <svg width="132" height="104" viewBox="0 0 132 104" fill="none" aria-hidden="true"><rect x="20" y="26" width="84" height="60" rx="14" transform="rotate(-8 62 56)" fill="#E6D6A8" stroke="#1E5B3C" stroke-width="4"/><rect x="30" y="18" width="84" height="60" rx="14" fill="#F7EFD8" stroke="#1E5B3C" stroke-width="4"/><path d="M46 40H98M46 54H76" stroke="#1E5B3C" stroke-width="4" stroke-linecap="round"/><circle cx="108" cy="22" r="8" fill="#F28FA8" stroke="#1E5B3C" stroke-width="3.5"/><path d="M108 30V44" stroke="#1E5B3C" stroke-width="3.5" stroke-linecap="round"/></svg>
+              <h3>Aún no tienes tarjetas</h3>
+              <p id="vacio-tarjetas-texto"></p>
+            </div>
+          </div>
+
+          <!-- PESTAÑA: Ideas clave (Fase 5) -->
+          <div role="tabpanel" id="panel-ideas" aria-labelledby="tab-ideas" hidden>
+            <div class="chips js-chips" data-tipo="ideas" role="group" aria-label="Filtrar por materia"></div>
+            <div class="slot-materia"></div>
+
+            <form class="nueva-idea" id="form-idea" novalidate hidden>
+              <div class="nueva-idea-fila">
+                <div class="nueva-idea-campo">
+                  <label class="lbl" for="idea-texto" id="idea-etiqueta">Nueva idea</label>
+                  <input class="campo" id="idea-texto" type="text" maxlength="120" autocomplete="off" placeholder="Una frase corta que no quieras olvidar" aria-describedby="idea-ayuda idea-msg">
+                </div>
+                <button class="btn btn-p btn-sm" type="submit"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Agregar</button>
+              </div>
+              <p class="lbl ayuda-idea" id="idea-ayuda">Enter para agregar · <span id="idea-contador">0 / 120</span></p>
+              <p class="msg-error" id="idea-msg" role="alert" hidden></p>
+            </form>
+            <p class="card elegir-materia" id="elegir-materia-ideas" hidden>Elige una materia arriba para añadir ideas.</p>
+
+            <ul class="lista-ideas" id="lista-ideas"></ul>
+
+            <div class="vacio-grande compacto" id="vacio-ideas">
+              <svg width="96" height="84" viewBox="0 0 96 84" fill="none" aria-hidden="true"><rect x="16" y="10" width="56" height="62" rx="12" fill="#F7EFD8" stroke="#1E5B3C" stroke-width="4"/><path d="M28 28H60M28 40H60M28 52H46" stroke="#1E5B3C" stroke-width="4" stroke-linecap="round"/><circle cx="74" cy="18" r="9" fill="#F28FA8" stroke="#1E5B3C" stroke-width="3.5"/></svg>
+              <h3>Aún no hay ideas</h3>
+              <p>Anota frases cortas que no quieras olvidar: una fórmula, una fecha, una definición.</p>
+              <button class="btn btn-p btn-sm" id="idea-primera" type="button">Escribir mi primera idea</button>
+            </div>
+          </div>
+
+          <!-- PESTAÑA: Repaso (Fase 6) -->
+          <div role="tabpanel" id="panel-repaso" aria-labelledby="tab-repaso" hidden>
+            <!-- Sin tarjetas -->
+            <div class="vacio-grande compacto" id="repaso-vacio" hidden>
+              <svg width="96" height="84" viewBox="0 0 96 84" fill="none" aria-hidden="true"><rect x="12" y="14" width="52" height="40" rx="10" transform="rotate(-8 38 34)" fill="#E6D6A8" stroke="#1E5B3C" stroke-width="4"/><rect x="26" y="22" width="52" height="40" rx="10" fill="#F7EFD8" stroke="#1E5B3C" stroke-width="4"/><path d="M38 42H66" stroke="#1E5B3C" stroke-width="4" stroke-linecap="round"/><circle cx="78" cy="22" r="9" fill="#F28FA8" stroke="#1E5B3C" stroke-width="3.5"/></svg>
+              <h3>Nada que repasar aún</h3>
+              <p>Crea al menos una tarjeta y vuelve aquí. Las que no sepas volverán a aparecer.</p>
+              <button class="btn btn-p btn-sm" id="repaso-ir-flash" type="button">Ir a Flashcards</button>
+            </div>
+
+            <div id="repaso-cuerpo" hidden>
+              <div class="repaso-top">
+                <div class="repaso-titulo">
+                  <h3 id="repaso-ronda">Ronda 1</h3>
+                  <label class="solo-lectores" for="repaso-materia">Materia a repasar</label>
+                  <select class="campo" id="repaso-materia"></select>
+                </div>
+                <span class="repaso-pos" id="repaso-pos"></span>
+              </div>
+
+              <!-- La tarjeta en juego -->
+              <div id="repaso-juego">
+                <div class="segs" id="repaso-segs" role="img"></div>
+                <p class="lbl repaso-cuenta" id="repaso-cuenta"></p>
+                <div class="repaso-carta">
+                  <div class="repaso-carta-top">
+                    <span class="pill" id="repaso-pill-materia"></span>
+                    <span class="pill dark" id="repaso-pill-respuesta" hidden>Respuesta</span>
+                  </div>
+                  <p class="repaso-pregunta" id="repaso-pregunta"></p>
+                  <div class="repaso-respuesta" id="repaso-respuesta" tabindex="-1" hidden></div>
+                </div>
+                <div class="rate-fila" id="repaso-acciones"></div>
+                <p class="lbl repaso-ayuda" id="repaso-ayuda">«No la sé» vuelve en 3 tarjetas. «Dudo» vuelve al final de la ronda. «La sé» sale de la ronda.</p>
+              </div>
+
+              <!-- Fin de la ronda -->
+              <div class="card fin-ronda" id="repaso-fin" hidden>
+                <h3 id="repaso-fin-titulo" tabindex="-1">¡Ronda completa!</h3>
+                <p id="repaso-fin-texto" aria-live="polite"></p>
+                <div class="fin-ronda-botones">
+                  <button class="btn btn-p btn-sm" id="repaso-otra" type="button">Repasar otra ronda</button>
+                  <button class="btn btn-s btn-sm" id="repaso-volver" type="button">Volver a Flashcards</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aviso breve con "Deshacer" (compartido por tarjetas e ideas) -->
+          <div class="aviso-breve" id="aviso-breve" role="status" hidden>
+            <span id="aviso-texto"></span>
+            <button class="btn btn-g btn-sm" id="aviso-deshacer" type="button">Deshacer</button>
+          </div>
+        </div>
+
+        <!-- Pie del panel: siempre visible -->
+        <div class="panel-pie">
+          <button class="btn btn-s btn-sm" id="boton-descargar" type="button" disabled>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Descargar mis tarjetas
+          </button>
+          <span class="nota-pie" id="nota-descarga">Las tarjetas no se guardan al cerrar la pestaña.</span>
+        </div>
+      </section>
+    </section>
+
+    <!-- VISTA 3: Fin de bloque -->
+    <section class="vista" data-vista="fin-bloque" aria-labelledby="titulo-fin" hidden>
+      <div class="zona fin-bloque">
+        <span id="cactus-fin"></span>
+        <h1 id="titulo-fin" tabindex="-1">¡Bloque terminado!</h1>
+        <p class="fin-mensaje" id="mensaje-fin" aria-live="polite"></p>
+        <div class="stats">
+          <div class="stat"><b id="stat-tarjetas">0</b><span id="stat-tarjetas-txt">tarjetas creadas</span></div>
+          <div class="stat"><b id="stat-ideas">0</b><span id="stat-ideas-txt">ideas clave</span></div>
+        </div>
+        <div class="fin-botones">
+          <button class="btn btn-p" id="boton-descanso" type="button">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg><span id="texto-descanso">Empezar descanso</span>
+          </button>
+          <button class="btn btn-s" id="boton-otro-bloque" type="button">Otro bloque</button>
+        </div>
+        <button class="btn btn-g btn-sm" id="boton-descargar-fin" type="button" disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Descargar mis tarjetas
+        </button>
+      </div>
+    </section>
+
+    <!-- VISTA 4: Descanso -->
+    <section class="vista descanso" data-vista="descanso" aria-labelledby="titulo-descanso" hidden>
+      <h1 class="solo-lectores" id="titulo-descanso">Descanso</h1>
+      <section class="zona reloj" aria-label="Cuenta regresiva del descanso">
+        <div class="reloj-top">
+          <span class="estado"><span class="punto rosa"></span><span id="etiqueta-descanso">Descanso</span></span>
+          <span class="lbl insignia-campana" id="insignia-campana"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg>Campana suave al terminar</span>
+        </div>
+        <div class="reloj-medio">
+          <span id="cactus-descanso"></span>
+          <div class="mono tiempo grande" id="tiempo-descanso" role="timer" aria-label="5 minutos 0 segundos">05:00</div>
+        </div>
+        <div class="progreso" aria-hidden="true"><div id="progreso-descanso"></div></div>
+        <div class="reloj-botones">
+          <button class="btn btn-p" id="boton-pausa-descanso" type="button"></button>
+          <button class="btn btn-s" id="boton-saltar" type="button">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l9 7-9 7zM18 5v14"/></svg>Saltar descanso
+          </button>
+          <button class="btn btn-p" id="boton-siguiente" type="button" hidden>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg><span id="texto-siguiente">Empezar bloque 2</span>
+          </button>
+          <span class="espacio"></span>
+          <button class="btn btn-g btn-sm" id="boton-cambiar-descanso" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Cambiar tiempo
+          </button>
+        </div>
+        <p class="solo-lectores" id="descanso-aviso" aria-live="polite"></p>
+      </section>
+
+      <section class="zona consejos" aria-label="Ideas para descansar">
+        <h2>Mientras descansas</h2>
+        <div class="tips">
+          <div class="tip"><span class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c3 4 6 7 6 10.5a6 6 0 0 1-12 0C6 10.5 9 7.5 12 3.5z"/></svg></span>Toma un vaso de agua</div>
+          <div class="tip"><span class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M12 8v6M5 10l7 1 7-1M9 21l3-7 3 7"/></svg></span>Estira cuello y espalda</div>
+          <div class="tip"><span class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>Mira algo lejano 20 segundos</div>
+        </div>
+      </section>
+    </section>
+
+  </main>
+</div>
+
+<!-- Aviso al pulsar "Cambiar tiempo" si hay tarjetas o ideas -->
+<div class="modal" id="modal-salir" hidden>
+  <div class="modal-caja" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+    <div class="modal-cab">
+      <span id="cactus-modal"></span>
+      <div>
+        <h2 id="modal-titulo">Tus tarjetas no se guardan.</h2>
+        <p>¿Descargarlas antes de salir?</p>
       </div>
     </div>
-    <p class="lbl" style="margin-top:12px">Cactus pequeño del encabezado (34 px, el mínimo permitido es 32): <span id="cactus-mini" style="vertical-align:middle"></span></p>
-  </section>
-
-  <section class="zona" aria-label="Botones">
-    <p class="sec">Botones · normal, hover, foco, deshabilitado</p>
-    <div class="botones-fila">
-      <button class="btn btn-p" type="button">Primario</button>
-      <button class="btn btn-p forzar-hover" type="button">Hover</button>
-      <button class="btn btn-p forzar-foco" type="button">Foco</button>
-      <button class="btn btn-p" type="button" disabled>Deshabilitado</button>
+    <div class="modal-botones">
+      <button class="btn btn-p" id="modal-descargar" type="button">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Descargar mis tarjetas
+      </button>
+      <button class="btn btn-s" id="modal-continuar" type="button">Continuar sin descargar</button>
+      <button class="btn btn-g btn-sm" id="modal-seguir" type="button">Seguir estudiando</button>
     </div>
-    <div class="botones-fila">
-      <button class="btn btn-s" type="button">Secundario</button>
-      <button class="btn btn-s forzar-hover" type="button">Hover</button>
-      <button class="btn btn-s forzar-foco" type="button">Foco</button>
-      <button class="btn btn-s" type="button" disabled>Deshabilitado</button>
-    </div>
-    <div class="botones-fila">
-      <button class="btn btn-g btn-sm" type="button">Texto</button>
-      <button class="btn btn-g btn-sm" type="button" style="background:var(--menta-media)">Hover</button>
-      <button class="btn btn-g btn-sm forzar-foco" type="button">Foco</button>
-      <button class="btn btn-g btn-sm" type="button" disabled>Deshabilitado</button>
-    </div>
-    <div class="botones-fila">
-      <button class="btn btn-p btn-lg" type="button">Grande 64</button>
-      <button class="btn btn-p" type="button">Normal 52</button>
-      <button class="btn btn-p btn-sm" type="button">Pequeño 44</button>
-    </div>
-  </section>
-
-  <section class="zona" aria-label="Tipografía">
-    <p class="sec">Tipografía</p>
-    <div class="mono cronometro-prueba">14:52</div>
-    <div class="tipo-fila"><span class="lbl">JetBrains Mono 800 · solo cronómetro</span></div>
-    <div class="tipo-fila"><p style="font-size:32px;font-weight:900;line-height:1.15">¿Cuánto vas a estudiar hoy?</p><span class="lbl">Nunito 900 · título de pantalla</span></div>
-    <div class="tipo-fila"><p style="font-size:17px;font-weight:600;line-height:1.4">Anota una pregunta y su respuesta mientras estudias. Aparecerán aquí para repasarlas.</p><span class="lbl">Nunito 600 · cuerpo</span></div>
-  </section>
-
-  <section class="zona" aria-label="Paleta">
-    <p class="sec">Colores</p>
-    <div id="paleta" style="display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:10px"></div>
-  </section>
-
-</main>
+    <p class="lbl modal-estado" id="modal-estado" role="status"></p>
+  </div>
+</div>
 
 <!-- Scripts clásicos (sin módulos) para que abra con doble clic. El orden importa. -->
+<script src="js/state.js"></script>
+<script src="js/timer.js"></script>
+<script src="js/sound.js"></script>
 <script src="js/cactus.js"></script>
+<script src="js/cards.js"></script>
+<script src="js/review.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

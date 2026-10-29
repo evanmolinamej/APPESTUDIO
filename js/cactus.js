@@ -73,29 +73,32 @@ var CACTUS_MACETA =
 
 var CACTUS_DURACION_FUNDIDO = 250; // milisegundos
 
-// Arma el texto SVG de un estado.
-function cactusSvg(estado) {
+// Arma el texto SVG de un estado. Si es "decorativo", el lector de pantalla lo ignora (para no repetir el mismo cactus).
+function cactusSvg(estado, decorativo) {
   var e = CACTUS_ESTADOS[estado];
-  return '<svg viewBox="0 0 200 228" fill="none" role="img" aria-label="' + e.etiqueta + '">' +
+  var accesible = decorativo ? 'aria-hidden="true"' : 'role="img" aria-label="' + e.etiqueta + '"';
+  return '<svg viewBox="0 0 200 228" fill="none" ' + accesible + '>' +
     e.dibujo + CACTUS_MACETA + '</svg>';
 }
 
 // Convierte el texto SVG en un elemento listo para insertar en la página.
-function cactusCapa(estado) {
+function cactusCapa(estado, decorativo) {
   var caja = document.createElement('div');
-  caja.innerHTML = cactusSvg(estado);
+  caja.innerHTML = cactusSvg(estado, decorativo);
   return caja.firstChild;
 }
 
 // Crea un cactus. "tam" es el ancho en píxeles (mínimo 32); el alto es 1,14 veces el ancho.
-function crearCactus(estado, tam) {
+// "decorativo" (opcional): true si es solo adorno y el lector de pantalla debe saltárselo.
+function crearCactus(estado, tam, decorativo) {
   var ancho = Math.max(32, tam);
   var el = document.createElement('span');
   el.className = 'cactus';
   el.style.width = ancho + 'px';
   el.style.height = Math.round(ancho * 1.14) + 'px';
   el.dataset.estado = estado;
-  el.appendChild(cactusCapa(estado));
+  if (decorativo) el.dataset.decorativo = '1';
+  el.appendChild(cactusCapa(estado, decorativo));
   return el;
 }
 
@@ -104,7 +107,7 @@ function cambiarCactus(el, estado) {
   if (el.dataset.estado === estado) return;
   el.dataset.estado = estado;
   var viejas = Array.prototype.slice.call(el.querySelectorAll('svg'));
-  var nueva = cactusCapa(estado);
+  var nueva = cactusCapa(estado, el.dataset.decorativo === '1');
   nueva.classList.add('entra'); // empieza transparente
   el.appendChild(nueva);
   nueva.getBoundingClientRect(); // obliga al navegador a "ver" el estado inicial antes de animar
