@@ -112,7 +112,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .tec.custom.on { border: 3px solid var(--bosque); padding: 17px 19px; }
 .tec-top { display: flex; align-items: center; justify-content: space-between; }
 .tec h2 { font-size: 21px; font-weight: 900; }
-.tec-titulo { padding: 0; border: 0; background: transparent; font-size: 21px; font-weight: 900; cursor: pointer; }
+.tec-titulo { padding: 9px 0; margin: -9px 0; border: 0; background: transparent; font-size: 21px; font-weight: 900; cursor: pointer; } /* el relleno da 44 px de alto sin mover nada */
 .tec-titulo:focus-visible { outline: 3px solid var(--bosque); outline-offset: 3px; border-radius: 8px; }
 .tec .check {
   display: none; width: 28px; height: 28px; border-radius: 50%;
@@ -399,3 +399,28 @@ kbd {
 .modal-botones .btn { width: 100%; }
 .modal-botones .btn-g { width: auto; align-self: center; }
 .modal-estado { margin-top: 10px; text-align: center; min-height: 1em; }
+
+/* ---------- Ventanas bajas: cronómetro compacto ----------
+   El cronómetro queda fijo arriba; si la ventana es baja, se achica para que el panel de abajo tenga espacio. */
+@media (max-height: 820px) {
+  .reloj { padding: 14px 24px 16px; }
+  .reloj-medio { margin-top: 2px; gap: 14px; }
+  .tiempo { font-size: 88px; }
+  .reloj .cactus { width: 88px !important; height: 100px !important; }
+  .progreso { margin-top: 10px; }
+  .reloj-botones { margin-top: 12px; }
+  .sesion { gap: 12px; }
+  .panel { padding: 12px 20px 14px; }
+  .panel-pie { margin-top: 8px; }
+}
+@media (max-height: 620px) {
+  .tiempo { font-size: 64px; }
+  .reloj .cactus { width: 64px !important; height: 73px !important; }
+  .reloj-top { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); } /* oculto a la vista, se sigue leyendo */
+}
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .fc-cara { transition: opacity 150ms !important; } /* el fundido corto de la tarjeta se conserva */
+}

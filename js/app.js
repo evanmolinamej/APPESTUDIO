@@ -389,7 +389,7 @@ function teclaEnPestanas(evento) {
 // ============================================================
 function arrancar() {
   cactusMini = document.getElementById('cactus-mini');
-  cactusMini.appendChild(crearCactus('lentes', 34));
+  cactusMini.appendChild(crearCactus('lentes', 34, true));
   cactusInicio = document.getElementById('cactus-inicio');
   cactusInicio.appendChild(crearCactus('dormido', 168));
   cactusReloj = document.getElementById('cactus-reloj');
@@ -413,7 +413,7 @@ function arrancar() {
   etiquetaFase = document.getElementById('etiqueta-fase');
   etiquetaBloque = document.getElementById('etiqueta-bloque');
   modalSalir = document.getElementById('modal-salir');
-  document.getElementById('cactus-modal').appendChild(crearCactus('lentes', 64));
+  document.getElementById('cactus-modal').appendChild(crearCactus('lentes', 64, true));
   tiempoDescanso = document.getElementById('tiempo-descanso');
   barraDescanso = document.getElementById('progreso-descanso');
   botonPausaDescanso = document.getElementById('boton-pausa-descanso');

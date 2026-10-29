@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EffectiveStudy</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 228%22 fill=%22none%22%3E%3Cg fill=%22none%22 stroke=%22%231E5B3C%22 stroke-width=%2232%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M70 130H38V104%22/%3E%3Cpath d=%22M130 116H162V86%22/%3E%3C/g%3E%3Crect x=%2262%22 y=%2240%22 width=%2276%22 height=%22138%22 rx=%2238%22 fill=%22%231E5B3C%22 stroke=%22%231E5B3C%22 stroke-width=%2212%22/%3E%3Cg fill=%22none%22 stroke=%22%234FAE74%22 stroke-width=%2220%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M70 130H38V104%22/%3E%3Cpath d=%22M130 116H162V86%22/%3E%3C/g%3E%3Crect x=%2262%22 y=%2240%22 width=%2276%22 height=%22138%22 rx=%2238%22 fill=%22%234FAE74%22/%3E%3Cpath d=%22M82 138V158M118 138V158%22 stroke=%22%233A9560%22 stroke-width=%224%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2283%22 cy=%2294%22 r=%2215%22 fill=%22%23F6F8F1%22 stroke=%22%231E5B3C%22 stroke-width=%224.5%22/%3E%3Ccircle cx=%22117%22 cy=%2294%22 r=%2215%22 fill=%22%23F6F8F1%22 stroke=%22%231E5B3C%22 stroke-width=%224.5%22/%3E%3Cpath d=%22M98 92Q100 89 102 92%22 stroke=%22%231E5B3C%22 stroke-width=%224.5%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2285%22 cy=%2296%22 r=%224.5%22 fill=%22%231E5B3C%22/%3E%3Ccircle cx=%22115%22 cy=%2296%22 r=%224.5%22 fill=%22%231E5B3C%22/%3E%3Cpath d=%22M92 122Q100 128 108 122%22 stroke=%22%231E5B3C%22 stroke-width=%224.5%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2271%22 cy=%22118%22 r=%225%22 fill=%22%23F28FA8%22/%3E%3Ccircle cx=%22129%22 cy=%22118%22 r=%225%22 fill=%22%23F28FA8%22/%3E%3Cpath d=%22M58 184H142L134 214Q133 220 126 220H74Q67 220 66 214Z%22 fill=%22%23E6D6A8%22 stroke=%22%231E5B3C%22 stroke-width=%225%22 stroke-linejoin=%22round%22/%3E%3Crect x=%2248%22 y=%22160%22 width=%22104%22 height=%2228%22 rx=%2214%22 fill=%22%23F7EFD8%22 stroke=%22%231E5B3C%22 stroke-width=%225%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
@@ -94,8 +95,10 @@
     </section>
 
     <!-- VISTA 2: Sesión de estudio. El cronómetro queda fijo arriba; solo el panel de abajo hace scroll. -->
-    <section class="vista sesion" data-vista="estudio" aria-label="Sesión de estudio" hidden>
-      <section class="zona reloj" aria-label="Cronómetro">
+    <section class="vista sesion" data-vista="estudio" aria-labelledby="titulo-sesion" hidden>
+      <h1 class="solo-lectores" id="titulo-sesion">Sesión de estudio</h1>
+      <section class="zona reloj" aria-labelledby="titulo-reloj">
+        <h2 class="solo-lectores" id="titulo-reloj">Cronómetro</h2>
         <div class="reloj-top">
           <span class="estado"><span class="punto"></span><span id="etiqueta-fase">Estudiando</span></span>
           <span class="lbl" id="etiqueta-bloque">Bloque 1</span>
@@ -117,7 +120,8 @@
         </div>
       </section>
 
-      <section class="zona panel" aria-label="Panel de estudio">
+      <section class="zona panel" aria-labelledby="titulo-panel">
+        <h2 class="solo-lectores" id="titulo-panel">Panel de estudio</h2>
         <div class="tabs" role="tablist" aria-label="Pestañas del panel">
           <button class="tab on" id="tab-flashcards" type="button" role="tab" aria-selected="true" aria-controls="panel-flashcards" data-pestana="flashcards">Flashcards <span class="badge" id="badge-tarjetas">0</span></button>
           <button class="tab" id="tab-ideas" type="button" role="tab" aria-selected="false" aria-controls="panel-ideas" data-pestana="ideas" tabindex="-1">Ideas clave <span class="badge" id="badge-ideas">0</span></button>
@@ -284,7 +288,8 @@
     </section>
 
     <!-- VISTA 4: Descanso -->
-    <section class="vista descanso" data-vista="descanso" aria-label="Descanso" hidden>
+    <section class="vista descanso" data-vista="descanso" aria-labelledby="titulo-descanso" hidden>
+      <h1 class="solo-lectores" id="titulo-descanso">Descanso</h1>
       <section class="zona reloj" aria-label="Cuenta regresiva del descanso">
         <div class="reloj-top">
           <span class="estado"><span class="punto rosa"></span><span id="etiqueta-descanso">Descanso</span></span>
